@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         Cangshi-TimerHooker
-// @namespace    https://greasyfork.org/en/users/104201
+// @namespace    https://greasyfork.org/en/users/waahah
 // @version      1.0.57
-// @description  黄盐改版的→控制网页计时器速度|加速跳过页面计时广告|视频快进（慢放）|跳过广告|支持几乎所有网页.
+// @description  改版的→控制网页计时器速度|加速跳过页面计时广告|视频快进（慢放）|跳过广告|支持几乎所有网页.
 // @include      *
-// @author       Cangshi,黄盐
+// @author       Cangshi改版
 // @match        http://*/*
 // @run-at       document-start
 // @grant        none
@@ -17,7 +17,7 @@
  * View: http://palerock.cn
  * 
  * 需要预加载脚本 https://gitee.com/HGJing/everthing-hook/raw/master/src/everything-hook.js
- * 黄盐 修改于 2021-1-24 21:07:48
+ * waahah 修改于 2022-9-14 21:07:48
  * @license    GPL-3.0-or-later
  * ---------------------------
  */
@@ -36,7 +36,7 @@ document.addEventListener('readystatechange', function () {
 
     var helper = function (eHookContext, timerContext, util) {
         return {
-            /***************禁用 BY 黄盐, PART 2 BEGIN
+            /***************禁用 BY waahah, PART 2 BEGIN
             applyUI: function () {
                 var style = '._th-container ._th-item{margin-bottom:3px;position:relative;width:0;height:0;cursor:pointer;opacity:.3;background-color:aquamarine;border-radius:100%;text-align:center;line-height:30px;-webkit-transition:all .35s;-o-transition:all .35s;transition:all .35s;right:30px}._th-container ._th-item,._th-container ._th-click-hover,._th_cover-all-show-times ._th_times{-webkit-box-shadow:-3px 4px 12px -5px black;box-shadow:-3px 4px 12px -5px black}._th-container:hover ._th-item._item-x2{margin-left:18px;width:40px;height:40px;line-height:40px}._th-container:hover ._th-item._item-x-2{margin-left:17px;width:38px;height:38px;line-height:38px}._th-container:hover ._th-item._item-xx2{width:36px;height:36px;margin-left:16px;line-height:36px}._th-container:hover ._th-item._item-xx-2{width:32px;height:32px;line-height:32px;margin-left:14px}._th-container:hover ._th-item._item-reset{width:30px;line-height:30px;height:30px;margin-left:10px}._th-click-hover{position:relative;-webkit-transition:all .5s;-o-transition:all .5s;transition:all .5s;height:45px;width:45px;cursor:pointer;opacity:.3;border-radius:100%;background-color:aquamarine;text-align:center;line-height:45px;right:0}._th-container:hover{left:-5px}._th-container{font-size:12px;-webkit-transition:all .5s;-o-transition:all .5s;transition:all .5s;left:-35px;top:20%;position:fixed;-webkit-box-sizing:border-box;box-sizing:border-box;z-index:100000;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}._th-container ._th-item:hover{opacity:.8;background-color:#5fb492;color:aliceblue}._th-container ._th-item:active{opacity:.9;background-color:#1b3a26;color:aliceblue}._th-container:hover ._th-click-hover{opacity:.8}._th-container:hover ._th-item{opacity:.6;right:0}._th-container ._th-click-hover:hover{opacity:.8;background-color:#5fb492;color:aliceblue}._th_cover-all-show-times{position:fixed;top:0;right:0;width:100%;height:100%;z-index:99999;opacity:1;font-weight:900;font-size:30px;color:#4f4f4f;background-color:rgba(0,0,0,0.1)}._th_cover-all-show-times._th_hidden{z-index:-99999;opacity:0;-webkit-transition:1s all;-o-transition:1s all;transition:1s all}._th_cover-all-show-times ._th_times{width:300px;height:300px;border-radius:50%;background-color:rgba(127,255,212,0.51);text-align:center;line-height:300px;position:absolute;top:50%;right:50%;margin-top:-150px;margin-right:-150px}';
 
@@ -158,7 +158,7 @@ document.addEventListener('readystatechange', function () {
                 global.changeTime = timer.changeTime;
             },
           
-            ****************禁用 BY 黄盐, PART 2 END*/
+            ****************禁用 BY waahah, PART 2 END*/
             applyHooking: function () {
                 // 劫持循环计时器
                 eHookContext.hookReplace(window, 'setInterval', function (setInterval) {
@@ -222,9 +222,9 @@ document.addEventListener('readystatechange', function () {
                 eHookContext.hookedToString(timerContext._clearInterval, clearInterval);
                 timerContext._mDate = window.Date;
                 
-                /***************禁用 BY 黄盐, PART 2 BEGIN
+                /***************禁用 BY waahah, PART 2 BEGIN
                 this.hookShadowRoot();
-                ****************禁用 BY 黄盐, PART 2 END*/
+                ****************禁用 BY waahah, PART 2 END*/
             },
             getHookedDateConstructor: function () {
                 return function () {
@@ -313,7 +313,7 @@ document.addEventListener('readystatechange', function () {
                     });
                 };
             },
-            /***************禁用 BY 黄盐, PART 3 BEGIN
+            /***************禁用 BY waahah, PART 3 BEGIN
             registerShortcutKeys: function (timer) {
                 // 快捷键注册
                 addEventListener('keydown', function (e) {
@@ -362,7 +362,7 @@ document.addEventListener('readystatechange', function () {
                 });
             },
             this.hookShadowRoot();
-            ****************禁用 BY 黄盐, PART 3 END*/
+            ****************禁用 BY waahah, PART 3 END*/
             /**
              * 当计时器速率被改变时调用的回调方法
              * @param percentage
@@ -378,7 +378,7 @@ document.addEventListener('readystatechange', function () {
                     idObj.nowId = this._setInterval.apply(window, idObj.args);
                 });
             },
-            /***************禁用 BY 黄盐, PART 4 BEGIN
+            /***************禁用 BY waahah, PART 4 BEGIN
             hookShadowRoot: function () {
                 var origin = Element.prototype.attachShadow;
                 eHookContext.hookAfter(Element.prototype, 'attachShadow',
@@ -388,7 +388,7 @@ document.addEventListener('readystatechange', function () {
                     }, false);
                 eHookContext.hookedToString(origin, Element.prototype.attachShadow);
             }
-            ****************禁用 BY 黄盐, PART 4 END*/
+            ****************禁用 BY waahah, PART 4 END*/
         }
     };
 
@@ -490,11 +490,11 @@ document.addEventListener('readystatechange', function () {
 
                     if (!normalUtil.isInIframe()) {
                         console.log('[TimeHooker]', 'loading outer window...');
-                        /***************禁用 BY 黄盐, PART 5 BEGIN
+                        /***************禁用 BY waahah, PART 5 BEGIN
                         h.applyUI();
                         h.applyGlobalAction(timerContext);
                         h.registerShortcutKeys(timerContext);
-                        ****************禁用 BY 黄盐, PART 5 END*/
+                        ****************禁用 BY waahah, PART 5 END*/
                     } else {
                         console.log('[TimeHooker]', 'loading inner window...');
                         normalUtil.listenParentEvent((function (percentage) {
@@ -516,7 +516,7 @@ document.addEventListener('readystatechange', function () {
                     // debugger;
                     //---------------------------------//
                     this._percentage = percentage;
-                    /***************禁用 BY 黄盐, PART 6 BEGIN
+                    /***************禁用 BY waahah, PART 6 BEGIN
                     var oldNode = document.getElementsByClassName('_th-click-hover');
                     var oldNode1 = document.getElementsByClassName('_th_times');
                     var displayNum = (1 / this._percentage).toFixed(2);
@@ -528,7 +528,7 @@ document.addEventListener('readystatechange', function () {
                     this._setTimeout.bind(window)(function () {
                         a.className = '_th_cover-all-show-times _th_hidden';
                     }, 100);
-                    ****************禁用 BY 黄盐, PART 6 END*/
+                    ****************禁用 BY waahah, PART 6 END*/
                     this.changeVideoSpeed();
                     this._clearInterval.bind(window)(this.videoSpeedIntervalId);
                     this.videoSpeedIntervalId = this._setInterval.bind(window)(function () {
@@ -542,22 +542,22 @@ document.addEventListener('readystatechange', function () {
                 },
                 changeVideoSpeed: function () {
                     var rate = 1 / this._percentage;
-                    /***************修改 BY 黄盐, PART 7 BEGIN */
+                    /***************修改 BY waahah, PART 7 BEGIN */
                     rate > 20 && (rate = 20);
                     rate < 0.065 && (rate = 0.065);
                     // console.log(rate);
-                    /****************修改 BY 黄盐, PART 7 END */
+                    /****************修改 BY waahah, PART 7 END */
 
                     var videos = querySelectorAll(document, 'video', true) || [];
                     if (videos.length) {
                         for (var i = 0; i < videos.length; i++) {
-                          /***************修改 BY 黄盐, PART 8 BEGIN */
+                          /***************修改 BY waahah, PART 8 BEGIN */
                           try {
                             videos[i].playbackRate = rate
                           } catch (error) {
                             console.log("可能是设置播放速度超出支持的范围了", rate, error)
                           }
-                          /****************修改 BY 黄盐, PART 8 END */
+                          /****************修改 BY waahah, PART 8 END */
                         }
                     }
                 }
