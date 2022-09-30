@@ -8,5 +8,5 @@
 
 >由于在时间线拉到下面动态获取新的问答或者展开评论的时候，Dom 会变化，所以此脚本动态监测页面dom变化，dom结构放生变化后才会遍历检查替换所有新出现的相关链接。
 
->[想要提出问题？点击这里](https://github.com/waahah/Myscript/issues])
+>[想要提出问题？点击这里](https://github.com/waahah/MyScript/issues])
 
