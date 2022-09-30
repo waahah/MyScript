@@ -1,32 +1,6 @@
-# userscript
+# *MyScript*
 
 #### 介绍
-Tampermonkey 相关脚本
+🔨 自己写的自用Tampermonkey相关脚本，有什么需求、建议、问题直接提 [Issues](https://github.com/waahah/MyScript/issues)，觉得好用请点个⭐鼓励一下叭~
 
-#### 软件架构
-软件架构说明
-
-
-#### 安装教程
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
-
-
-#### 特技
-
-    使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
+> 也可以前往 GreasyFork 脚本页向 [我](https://greasyfork.org/zh-CN/users/856508-waahah) 反馈。
