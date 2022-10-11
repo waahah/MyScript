@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         古诗文网自动填充验证码
 // @namespace    http://waahah.github.io/
-// @version      0.1.3
+// @version      0.2.3
 // @description  自动识别填充验证码以及账号信息并登录，不需要到代码中修改账号，登陆一次之后就会自动登录
 // @author       waahah
 // @license      Apache License 2.0
@@ -13,12 +13,25 @@
 // ==/UserScript==
  
 (function() {
-    'use strict'
+    'use strict';
+    class Sleep {
+        constructor(timeout) {
+          this.timeout = timeout;
+        }
+        then(resolve, reject) {
+          const startTime = Date.now();
+          setTimeout(
+            () => resolve(Date.now() - startTime),
+            this.timeout
+          );
+        }
+      }
+ 
     let name,pwd,valName,valPwd;
     const host_name = location.host+"_nmae";
     const host_pwd = location.host+"_pwd";
  
-    function del(){
+    const del = () => {
         if (window.localStorage.getItem(host_name)!==null){
 			window.localStorage.removeItem(host_name);
 		}
@@ -50,7 +63,7 @@
     const emailNo = document.getElementById('emailNo').style.display;
     const pwdNo = document.getElementById('pwdNo').style.display;
  
-    function login(){
+    const login = () => {
         $("#leftLogin").fadeOut("slow");//立即停止显示微信扫码登录
         clearInterval(intervalErweima);
         if(account.value == '邮箱 / 手机号' && password .value == ''){
@@ -62,10 +75,12 @@
             zhanghao.value = valName;
             password .value = valPwd;
         }
+        return new Promise(resolve => {
+            console.log('开始尝试登录...');
+        })
     }
-    login();
  
-    async function security(){
+    const security = async () => {
         //GetCodeImg();
         const exampleImage = "/RandCode.ashx";
         console.log("exampleImage"+exampleImage);
@@ -90,9 +105,10 @@
                 if(emailNo == 'none' && pwdNo == 'none'&&result.data.confidence>30){
                     submit.click();
                 }
-                if(result.data.confidence<50){
+                if(result.data.confidence<70){
                     (async () => GetCodeImg()) ().then(
                           async () => {
+                            await new Sleep(1000);
                             await security();
                         }
                     );
@@ -100,8 +116,10 @@
                 }
         }
    }
-    window.onload = () => {
-        security();
+    window.onload = async() => {
+        login().then(
+            security()
+        );
     }
  
 })();
