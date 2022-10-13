@@ -28,8 +28,8 @@
       }
  
     let name,pwd,valName,valPwd;
-    const host_name = location.host+"_nmae";
-    const host_pwd = location.host+"_pwd";
+    const host_name = `${location.host}_nmae`;
+    const host_pwd = `${location.host}_pwd`;
  
     const del = () => {
         if (window.localStorage.getItem(host_name)!==null){
@@ -83,7 +83,7 @@
     const security = async () => {
         //GetCodeImg();
         const exampleImage = "/RandCode.ashx";
-        console.log("exampleImage"+exampleImage);
+        console.log(`exampleImage：${exampleImage}`);
  
 		const worker = Tesseract.createWorker({
             logger: m => console.log(m)
@@ -98,14 +98,14 @@
  
 			    let result = await worker.recognize(exampleImage);
 			    console.log(result.data);
-                console.log("识别成功率："+result.data.confidence);
+                console.log(`识别成功率：${result.data.confidence}`);
  
 			    await worker.terminate();
                 core.value = result.data.text;
-                if(emailNo == 'none' && pwdNo == 'none'&&result.data.confidence>30){
+                if(emailNo == 'none' && pwdNo == 'none'&&result.data.confidence>50){
                     submit.click();
                 }
-                if(result.data.confidence<70){
+                if(result.data.confidence<60){
                     (async () => GetCodeImg()) ().then(
                           async () => {
                             await new Sleep(1000);
