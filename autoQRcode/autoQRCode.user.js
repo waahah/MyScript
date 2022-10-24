@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         古诗文网自动填充验证码
 // @namespace    http://waahah.github.io/
-// @version      0.2.3
+// @version      0.2.4
 // @description  自动识别填充验证码以及账号信息并登录，不需要到代码中修改账号，登陆一次之后就会自动登录
 // @author       waahah
 // @license      Apache License 2.0
@@ -11,8 +11,8 @@
 // @grant             unsafeWindow
 // @grant             GM_registerMenuCommand
 // ==/UserScript==
- 
-(function() {
+
+(function () {
     'use strict';
     class Sleep {
         constructor(timeout) {
@@ -26,35 +26,42 @@
           );
         }
       }
- 
-    let name,pwd,valName,valPwd;
+
+    let name, pwd, valName, valPwd;
     const host_name = `${location.host}_nmae`;
     const host_pwd = `${location.host}_pwd`;
- 
-    const del = () => {
-        if (window.localStorage.getItem(host_name)!==null){
-			window.localStorage.removeItem(host_name);
-		}
-		if (window.localStorage.getItem(host_pwd)!==null){
-			window.localStorage.removeItem(host_pwd);
-		}
+
+    //存放自己写好的工具类函数的对象
+    const utils = {
+        get_utils: function () {
+            valName = localStorage.getItem(host_name);
+            valPwd = localStorage.getItem(host_pwd);
+            return this.get_utils;
+        },
+        set_utils: () => {
+            window.localStorage.setItem(host_name, name);
+            window.localStorage.setItem(host_pwd, pwd);
+        }
+    };
+    utils.del_utils = () => {
+        if (window.localStorage.getItem(host_name) !== null) {
+            window.localStorage.removeItem(host_name);
+        }
+        if (window.localStorage.getItem(host_pwd) !== null) {
+            window.localStorage.removeItem(host_pwd);
+        }
     }
-    GM_registerMenuCommand("删除保存在本地的账号密码", del);
- 
-    valName = localStorage.getItem(host_name);
-    valPwd = localStorage.getItem(host_pwd);
- 
-    if(valName== undefined && valPwd == undefined){
-        name = prompt('第一次需输入邮箱/手机号:','');
-        pwd = prompt('第一次需输入密码:','');
-        localStorage.setItem(host_name, name);
-        localStorage.setItem(host_pwd, pwd);
-        valName = localStorage.getItem(host_name);
-        valPwd = localStorage.getItem(host_pwd);
+
+    GM_registerMenuCommand("删除保存在本地的账号密码", utils.del_utils);
+    utils.get_utils();
+
+    if (valName == undefined && valPwd == undefined) {
+        name = prompt('第一次需输入邮箱/手机号:', '');
+        pwd = prompt('第一次需输入密码:', '');
+        utils.set_utils();
         console.log(localStorage);
- 
     }
- 
+
     const account = document.querySelector('#email');
     const password = document.querySelector('#pwd');
     const core = document.querySelector('#code');
@@ -62,64 +69,64 @@
     const submit = document.querySelector('#denglu');
     const emailNo = document.getElementById('emailNo').style.display;
     const pwdNo = document.getElementById('pwdNo').style.display;
- 
+
     const login = () => {
         $("#leftLogin").fadeOut("slow");//立即停止显示微信扫码登录
         clearInterval(intervalErweima);
-        if(account.value == '邮箱 / 手机号' && password .value == ''){
+        if (account.value == '邮箱 / 手机号' && password.value == '') {
             //onEmial();//消除提示
             account.value = valName;
             //onPwd();消除提示
-            password .value = valPwd;
-        }else if(zhanghao.value !== valName || password .value !== valPwd){
+            password.value = valPwd;
+        } else if (zhanghao.value !== valName || password.value !== valPwd) {
             zhanghao.value = valName;
-            password .value = valPwd;
+            password.value = valPwd;
         }
         return new Promise(resolve => {
             console.log('开始尝试登录...');
         })
     }
- 
+
     const security = async () => {
         //GetCodeImg();
         const exampleImage = "/RandCode.ashx";
         console.log(`exampleImage：${exampleImage}`);
- 
-		const worker = Tesseract.createWorker({
+
+        const worker = Tesseract.createWorker({
             logger: m => console.log(m)
-		});
-		Tesseract.setLogging(true);
-		work();
- 
-		async function work() {
-                await worker.load();
-			    await worker.loadLanguage('eng');
-			    await worker.initialize('eng');
- 
-			    let result = await worker.recognize(exampleImage);
-			    console.log(result.data);
-                console.log(`识别成功率：${result.data.confidence}`);
- 
-			    await worker.terminate();
-                core.value = result.data.text;
-                if(emailNo == 'none' && pwdNo == 'none'&&result.data.confidence>50){
-                    submit.click();
-                }
-                if(result.data.confidence<60){
-                    (async () => GetCodeImg()) ().then(
-                          async () => {
-                            await new Sleep(1000);
-                            await security();
-                        }
-                    );
- 
-                }
+        });
+        Tesseract.setLogging(true);
+        work();
+
+        async function work() {
+            await worker.load();
+            await worker.loadLanguage('eng');
+            await worker.initialize('eng');
+
+            let result = await worker.recognize(exampleImage);
+            console.log(result.data);
+            console.log(`识别成功率：${result.data.confidence}`);
+
+            await worker.terminate();
+            core.value = result.data.text;
+            if (emailNo == 'none' && pwdNo == 'none' && result.data.confidence > 50) {
+                submit.click();
+            }
+            if (result.data.confidence < 60) {
+                (async () => GetCodeImg())().then(
+                    async () => {
+                        await new Sleep(1000);
+                        await security();
+                    }
+                );
+
+            }
         }
-   }
-    window.onload = async() => {
+    }
+    window.onload = async () => {
         login().then(
             security()
         );
     }
- 
+
 })();
