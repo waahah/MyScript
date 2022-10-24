@@ -113,9 +113,9 @@
                 submit.click();
             }
             if (result.data.confidence < 60) {
-                (async () => GetCodeImg())().then(
+                (async () => GetCodeImg()) ().then(
                     async () => {
-                        await new Sleep(1000);
+                        await new Sleep(500);
                         await security();
                     }
                 );
@@ -123,6 +123,7 @@
             }
         }
     }
+
     window.onload = async () => {
         login().then(
             security()
