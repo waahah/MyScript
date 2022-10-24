@@ -31,7 +31,7 @@
     const host_name = `${location.host}_nmae`;
     const host_pwd = `${location.host}_pwd`;
 
-    //存放自己写好的工具类函数的对象
+    //存放自己写好的工具类方法的对象
     const utils = {
         get_utils: function () {
             valName = localStorage.getItem(host_name);
