@@ -27,59 +27,131 @@
 // @grant             GM.xmlHttpRequest
 // @grant             GM_registerMenuCommand
 // ==/UserScript==
- 
-(function() {
+
+(function () {
     /**
     * 遵循开源协议,转载请注明出处谢谢
     * 此脚本参考代码相应位置附有出处
     */
     'use strict';
- 
-$(function(){
- 
-    let webUrl = window.location.href;
-    let webUrl2;
-    const path = window.location.pathname.split("/")[1];
-	const host = location.host;
-    const tfpath = location.href.split("/");
-    const title = document.title.split(' - ')[0];
-	const InterfaceList = [
-        {"host":"wkdownload","url":"http://www.html22.com/d/?url="},
-        {"host":"wenku.baidu.com","func":"bdwk()","el":"bdwk_ele"},
-        {"host":"www.doc88.com","func":"doc()","el":"doc_ele"},
-        {"host":"www.docin.com","func":"docin()","el":"docin_ele"}
-    ]
-    function GMxmlhttpRequest(obj) {
-        if (typeof GM_xmlhttpRequest === "function") {
-            GM_xmlhttpRequest(obj); }
-        else {GM.xmlhttpRequest(obj);} }
-    function GMopenInTab(url, open_in_background) {
-        if (typeof GM_openInTab === "function") {
-            GM_openInTab(url, open_in_background);
+
+    $(function () {
+
+        let webUrl = window.location.href;
+        let webUrl2;
+        const path = window.location.pathname.split("/")[1];
+        const host = location.host;
+        const tfpath = location.href.split("/");
+        const title = document.title.split(' - ')[0];
+        const InterfaceList = [
+            { "host": "wkdownload", "url": "http://www.html22.com/d/?url=" },
+            { "host": "wenku.baidu.com", "func": "bdwk()", "el": "bdwk_ele" },
+            { "host": "www.doc88.com", "func": "doc()", "el": "doc_ele" },
+            { "host": "www.docin.com", "func": "docin()", "el": "docin_ele" }
+        ]
+        function GMxmlhttpRequest(obj) {
+            if (typeof GM_xmlhttpRequest === "function") {
+                GM_xmlhttpRequest(obj);
+            }
+            else { GM.xmlhttpRequest(obj); }
         }
-            else {GM.openInTab(url, open_in_background); }}
-    const after = obj => {
-        return obj.replace('/view/', '/share/').replace('.html', '') + '?share_api=1&width=800';
-    }
-    const css = css => {
-		const myStyle = document.createElement('style');
-        myStyle.textContent = css;
-        const doc = document.head || document.documentElement;
-		doc.appendChild(myStyle);
-	}
- 
-	css(`#zuihuitao {cursor:pointer; position:fixed; top:100px; left:0px; width:0px; z-index:2147483647; font-size:12px; text-align:left;}
-			#zuihuitao .logo { position: absolute;right: 0; width: 1.375rem;padding: 10px 2px;text-align: center;color: #fff;cursor: auto;user-select: none;border-radius: 0 4px 4px 0;transform: translate3d(100%, 5%, 0);background: deepskyblue;}
-			#zuihuitao .die {display:none; position:absolute; left:28px; top:0; text-align:center;background-color:#04B4AE; border:1px solid gray;}
-			#zuihuitao .die li{font-size:12px; color:#fff; text-align:center; width:60px; line-height:21px; float:left; border:1px solid gray;border-radius: 6px 6px 6px 6px; padding:0 4px; margin:4px 2px;list-style-type: none;}
-			#zuihuitao .die li:hover{color:#fff;background:#FE2E64;}
-            @media print {body {display: block !important;}}
-            *{-webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; user-select: text;}
-			.add{background-color:#FE2E64;}
-            .btn-success{position: fixed;font-weight: 400;color: #fff;background-color: #28a745;border-color: #28a745;text-align: center;vertical-align: middle;border: 1px solid transparent;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;border-radius: .25rem; z-index:2147483647;cursor: pointer;}`);
- 
- 
-	const html = $(`<div id='zuihuitao'>
+        function GMopenInTab(url, open_in_background) {
+            if (typeof GM_openInTab === "function") {
+                GM_openInTab(url, open_in_background);
+            }
+            else { GM.openInTab(url, open_in_background); }
+        }
+        const after = obj => {
+            return obj.replace('/view/', '/share/').replace('.html', '') + '?share_api=1&width=800';
+        }
+        const css = css => {
+            const myStyle = document.createElement('style');
+            myStyle.textContent = css;
+            const doc = document.head || document.documentElement;
+            doc.appendChild(myStyle);
+        }
+
+        css(`#zuihuitao {
+                cursor:pointer;
+                position:fixed;
+                top:100px;
+                left:0px;
+                width:0px;
+                z-index:2147483647;
+                font-size:12px;
+                text-align:left;
+            }
+			#zuihuitao .logo {
+                position: absolute;
+                right: 0;
+                width: 1.375rem;
+                padding: 10px 2px;
+                text-align: center;
+                color: #fff;
+                cursor: auto;
+                user-select: none;
+                border-radius: 0 4px 4px 0;
+                transform: translate3d(100%, 5%, 0);
+                background: deepskyblue;
+            }
+			#zuihuitao .die {
+                display:none;
+                position:absolute;
+                left:28px; top:0;
+                text-align:center;
+                background-color:#04B4AE;
+                border:1px solid gray;
+            }
+			#zuihuitao .die li{
+                font-size:12px;
+                color:#fff;
+                text-align:center;
+                width:60px;
+                line-height:21px;
+                float:left;
+                border:1px solid gray;
+                border-radius: 6px 6px 6px 6px;
+                padding:0 4px;
+                margin:4px 2px;
+                list-style-type: none;
+            }
+			#zuihuitao .die li:hover{
+                color:#fff;
+                background:#FE2E64;
+            }
+            @media print {
+                body {
+                    display: block !important;
+                }
+            }
+            *{
+                -webkit-user-select: text;
+                -moz-user-select: text;
+                -ms-user-select: text;
+                user-select: text;
+            }
+			.add{
+                background-color:#FE2E64;
+            }
+            .btn-success{
+                position: fixed;
+                font-weight: 400;
+                color: #fff;
+                background-color: #28a745;
+                border-color: #28a745;
+                text-align: center;
+                vertical-align: middle;
+                border: 1px solid transparent;
+                padding: .375rem .75rem;
+                font-size: 1rem;
+                line-height: 1.5;
+                border-radius: .25rem; 
+                z-index:2147483647;
+                cursor: pointer;
+            }`);
+
+
+        const html = $(`<div id='zuihuitao'>
 		    <div class='item_text'>
 		        <div class="logo"><a id="m">文库下载</a></div>
 		            <div class='die' >
@@ -99,292 +171,294 @@ $(function(){
 		                        </ul>
 		                        <br>
 							</div>`);
- 
-    webUrl2 = after(webUrl);
-	$("body").append(html);
-	$(".item_text").on("mouseover", () => {
-	        $(".die").show();
-	    });
-	    $(".item_text").on("mouseout", () => {
-	        $(".die").hide();
-	    });
-    console.log(document.lastModified);
- 
-    if( path == "link"){
-        const base_url = "https://wenku.baidu.com/user/interface/layerpop?act=get&platform=pc&layer_id=8";
-        const xhttp = new XMLHttpRequest();
-        xhttp.open("GET",base_url);
-        xhttp.send(null);
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                console.log('success');
-                let datas = xhttp.responseText;
-                //console.log(xhttp.responseText);
-                datas=JSON.parse(datas);
-                console.log(datas);
-                const have = datas.data[8].data.pageInfo;
-                if(have !== undefined){
-                    const url = have.referer;
-                    console.log(url);
-                    webUrl = url;
-                    webUrl2 = after(url);
-                    }else{
+
+        webUrl2 = after(webUrl);
+        $("body").append(html);
+        $(".item_text").on("mouseover", () => {
+            $(".die").show();
+        });
+        $(".item_text").on("mouseout", () => {
+            $(".die").hide();
+        });
+        console.log(document.lastModified);
+
+        if (path == "link") {
+            const base_url = "https://wenku.baidu.com/user/interface/layerpop?act=get&platform=pc&layer_id=8";
+            const xhttp = new XMLHttpRequest();
+            xhttp.open("GET", base_url);
+            xhttp.send(null);
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log('success');
+                    let datas = xhttp.responseText;
+                    //console.log(xhttp.responseText);
+                    datas = JSON.parse(datas);
+                    console.log(datas);
+                    const have = datas.data[8].data.pageInfo;
+                    if (have !== undefined) {
+                        const url = have.referer;
+                        console.log(url);
+                        webUrl = url;
+                        webUrl2 = after(url);
+                    } else {
                         console.log('用户已登录账号 url为空,使用方案二');
                         const pageData = document.querySelector("body > script:nth-child(5)").innerText;
                         //console.log(pageData);
-                        const DocId = pageData.indexOf('showDocId')+12;
-                        const StoreId = pageData.indexOf('showStoreId')-3;
-                        const showDocId = pageData.slice(DocId,StoreId);
-                        const url = tfpath[0]+"//"+tfpath[2]+'/view/'+showDocId+".html";
+                        const DocId = pageData.indexOf('showDocId') + 12;
+                        const StoreId = pageData.indexOf('showStoreId') - 3;
+                        const showDocId = pageData.slice(DocId, StoreId);
+                        const url = `${tfpath[0]}//${tfpath[2]}/view/${showDocId}.html`;
                         console.log(url);
                         webUrl = url;
                         webUrl2 = after(url);
                     }
- 
+
+                }
             }
         }
-    }
-    if( path == "tfview"){
-        const tfurl = tfpath[0]+"//"+tfpath[2]+"/view/"+tfpath[4];
-        const tfurl2 = after(tfurl);
-        console.log(tfurl);
-        webUrl = tfurl;
-        webUrl2 = tfurl2;
-    }
- 
-    const sleep = ms => {
-     return new Promise(resolve => setTimeout(resolve, ms));
-    }
-    const share = () => {
-        //console.log(webUrl);
-        let ph = document.body.scrollHeight;
-        let FPS = 1000;
-        let retime = setInterval(function () {
-            $(window).scrollTop( FPS,{ behavior: 'smooth'});
-            //ph = document.body.scrollHeight;
-            FPS = FPS + 1000;
-            if (FPS > ph) {
-                clearInterval(retime);
-                setTimeout(function () {
-                    window.print();
-                    $(".logo").show();
-                },500);
- 
-            }
-        }, 300)
- 
-    }
- 
-    const downloadPDF = (ele, pdfName) => {
-        window.scrollTo(0, 0);
-        let eleW = ele.offsetWidth; // 获得该容器的宽
-        let eleH = ele.offsetHeight; // 获得该容器的高
-        let eleOffsetTop = ele.offsetTop; // 获得该容器到文档顶部的距离
-        let eleOffsetLeft = ele.offsetLeft; // 获得该容器到文档最左的距离
- 
-        var canvas = document.createElement("canvas");
-        var abs = 0;
- 
-        let win_in = document.documentElement.clientWidth || document.body.clientWidth; // 获得当前可视窗口的宽度（不包含滚动条）
-        let win_out = window.innerWidth; // 获得当前窗口的宽度（包含滚动条）
- 
-        if (win_out > win_in) {
-            // abs = (win_o - win_i)/2;    // 获得滚动条长度的一半
-            abs = (win_out - win_in) / 2; // 获得滚动条宽度的一半
-            // console.log(a, '新abs');
+        if (path == "tfview") {
+            const tfurl = `${tfpath[0]}//${tfpath[2]}/view/${tfpath[4]}`;
+            const tfurl2 = after(tfurl);
+            console.log(tfurl);
+            webUrl = tfurl;
+            webUrl2 = tfurl2;
         }
-        canvas.width = eleW * 2; // 将画布宽&&高放大两倍
-        canvas.height = eleH * 2;
- 
-        var context = canvas.getContext("2d");
-        context.scale(2, 2);
-        context.translate(-eleOffsetLeft - abs, -eleOffsetTop);
-        // 这里默认横向没有滚动条的情况，因为offset.left(),有无滚动条的时候存在差值，因此
-        // translate 的时候，要把这个差值去掉
- 
-        html2canvas(ele, {
-            dpi: 300,
-            scale: 1,
-            allowTaint: false,  //允许 canvas 污染， allowTaint参数要去掉，否则是无法通过toDataURL导出canvas数据的
-            useCORS: false, //允许canvas画布内 可以跨域请求外部链接图片, 允许跨域请求。
-        }).then((canvas) => {
-            var contentWidth = canvas.width;
-            var contentHeight = canvas.height;
-            //一页pdf显示html页面生成的canvas高度;
-            var pageHeight = contentWidth / 595.28 * 841.89;
-            //未生成pdf的html页面高度
-            var leftHeight = contentHeight;
-            //页面偏移
-            var position = 0;
-            //a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
-            var imgWidth = 595.28;
-            var imgHeight = 595.28 / contentWidth * contentHeight;
-            var pageData = canvas.toDataURL('image/jpeg', 1.0);
-            var pdf = new jspdf.jsPDF('', 'pt', 'a4');
-            //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
-            //当内容未超过pdf一页显示的范围，无需分页
-            // console.log('处理完画布高度：' + contentHeight)
-            // console.log('每页高度：' + pageHeight)
-            // console.log(imgWidth, imgHeight);
- 
-            if (leftHeight < pageHeight) {
-                //在pdf.addImage(pageData, 'JPEG', 左，上，宽度，高度)设置在pdf中显示；
-                pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
-            } else { // 分页
-                while (leftHeight > 10) {
-                    // console.log(leftHeight)
-                    pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight);
-                    leftHeight -= pageHeight;
-                    position -= 871.89;
-                    //避免添加空白页
-                    if (leftHeight > 10) {
-                        pdf.addPage();
+
+        const sleep = ms => {
+            return new Promise(resolve => {
+                setTimeout(resolve, ms)
+            });
+        }
+        const share = () => {
+            //console.log(webUrl);
+            let ph = document.body.scrollHeight;
+            let FPS = 1000;
+            let retime = setInterval(function () {
+                $(window).scrollTop(FPS, { behavior: 'smooth' });
+                //ph = document.body.scrollHeight;
+                FPS = FPS + 1000;
+                if (FPS > ph) {
+                    clearInterval(retime);
+                    setTimeout(function () {
+                        window.print();
+                        $(".logo").show();
+                    }, 500);
+
+                }
+            }, 300)
+
+        }
+
+        const downloadPDF = (ele, pdfName) => {
+            window.scrollTo(0, 0);
+            let eleW = ele.offsetWidth; // 获得该容器的宽
+            let eleH = ele.offsetHeight; // 获得该容器的高
+            let eleOffsetTop = ele.offsetTop; // 获得该容器到文档顶部的距离
+            let eleOffsetLeft = ele.offsetLeft; // 获得该容器到文档最左的距离
+
+            var canvas = document.createElement("canvas");
+            var abs = 0;
+
+            let win_in = document.documentElement.clientWidth || document.body.clientWidth; // 获得当前可视窗口的宽度（不包含滚动条）
+            let win_out = window.innerWidth; // 获得当前窗口的宽度（包含滚动条）
+
+            if (win_out > win_in) {
+                // abs = (win_o - win_i)/2;    // 获得滚动条长度的一半
+                abs = (win_out - win_in) / 2; // 获得滚动条宽度的一半
+                // console.log(a, '新abs');
+            }
+            canvas.width = eleW * 2; // 将画布宽&&高放大两倍
+            canvas.height = eleH * 2;
+
+            var context = canvas.getContext("2d");
+            context.scale(2, 2);
+            context.translate(-eleOffsetLeft - abs, -eleOffsetTop);
+            // 这里默认横向没有滚动条的情况，因为offset.left(),有无滚动条的时候存在差值，因此
+            // translate 的时候，要把这个差值去掉
+
+            html2canvas(ele, {
+                dpi: 300,
+                scale: 1,
+                allowTaint: false,  //允许 canvas 污染， allowTaint参数要去掉，否则是无法通过toDataURL导出canvas数据的
+                useCORS: false, //允许canvas画布内 可以跨域请求外部链接图片, 允许跨域请求。
+            }).then((canvas) => {
+                var contentWidth = canvas.width;
+                var contentHeight = canvas.height;
+                //一页pdf显示html页面生成的canvas高度;
+                var pageHeight = contentWidth / 595.28 * 841.89;
+                //未生成pdf的html页面高度
+                var leftHeight = contentHeight;
+                //页面偏移
+                var position = 0;
+                //a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
+                var imgWidth = 595.28;
+                var imgHeight = 595.28 / contentWidth * contentHeight;
+                var pageData = canvas.toDataURL('image/jpeg', 1.0);
+                var pdf = new jspdf.jsPDF('', 'pt', 'a4');
+                //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
+                //当内容未超过pdf一页显示的范围，无需分页
+                // console.log('处理完画布高度：' + contentHeight)
+                // console.log('每页高度：' + pageHeight)
+                // console.log(imgWidth, imgHeight);
+
+                if (leftHeight < pageHeight) {
+                    //在pdf.addImage(pageData, 'JPEG', 左，上，宽度，高度)设置在pdf中显示；
+                    pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
+                } else { // 分页
+                    while (leftHeight > 10) {
+                        // console.log(leftHeight)
+                        pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight);
+                        leftHeight -= pageHeight;
+                        position -= 871.89;
+                        //避免添加空白页
+                        if (leftHeight > 10) {
+                            pdf.addPage();
+                        }
                     }
                 }
-            }
-            //可动态生成
-            pdf.save(pdfName)
-        })
-    }
- 
-    const replica = () => {
-        /**
-         * 灵感来源于https://greasyfork.org/zh-CN/scripts/445128
-         */
-        try {
-            var text = $('div.link')[0].outerText.split("”的文档")[0].split("查看全部包含“")[1];
-        } catch (error) {
-            console.log(error.stack);
-            text = "出错啦，请通知作者修复";
-        }
- 
-        if (navigator.clipboard) {
-            navigator.clipboard.writeText(text);
-        } else {
-            const textarea = document.createElement('textarea');
-            document.body.appendChild(textarea);
-            textarea.style.position = 'fixed';
-            textarea.style.clip = 'rect(0 0 0 0)';
-            textarea.style.top = '10px';
-            textarea.value = text;
-            textarea.select();
-            document.execCommand('copy', true);
-            document.body.removeChild(textarea);
-        }
-    }
- 
-    (() => {
-        let oldtext = "";
-        let count = 0;
-        if(host == InterfaceList[1].host){
-            $(document).unbind('keydown').bind('keydown', e => {
-                if(e.ctrlKey && e.keyCode  == 67) {
-                    replica();
-                    $('.dialog-mask').remove();
-                    $('.copy-limit-dialog-v2').remove();
-                    $(".btn-success").text("复制成功").fadeOut(1000);
-                    e.preventDefault();
-                    count+=1;
-                    //return false;
-                }
+                //可动态生成
+                pdf.save(pdfName)
             })
- 
-            document.onmouseup = ev => {
-                $(".btn-success").remove();
-                var nowtext = $('div.link')[0].outerText.split("”的文档")[0].split("查看全部包含“")[1];
-                if(nowtext != oldtext){
-                    const oEvent=ev||event;
-                    const elbtn=$(`<div class="btn-success" style="left:${oEvent.clientX+15+'px'}; top: ${oEvent.clientY-10+'px'};">复制</div>`);
-                    $("body").append(elbtn);
-                    oldtext = nowtext;
-                    $("#reader-helper").hide();
-                }
- 
-                $(".btn-success").on("click", e => {
-                    replica();
-                    count+=1;
-                    console.info(`第${count}次为您复制,内容为：${nowtext}`);
-                    //$(".btn-success").fadeOut(1000);
-                }).on("mouseup", e => {
-                    $(".btn-success").text("复制成功");
-                    $(".btn-success").fadeOut(1000);
-                    e.stopPropagation();
-                    e.preventDefault();
+        }
+
+        const replica = () => {
+            /**
+             * 灵感来源于https://greasyfork.org/zh-CN/scripts/445128
+             */
+            try {
+                var text = $('div.link')[0].outerText.split("”的文档")[0].split("查看全部包含“")[1];
+            } catch (error) {
+                console.log(error.stack);
+                text = "出错啦，请通知作者修复";
+            }
+
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text);
+            } else {
+                const textarea = document.createElement('textarea');
+                document.body.appendChild(textarea);
+                textarea.style.position = 'fixed';
+                textarea.style.clip = 'rect(0 0 0 0)';
+                textarea.style.top = '10px';
+                textarea.value = text;
+                textarea.select();
+                document.execCommand('copy', true);
+                document.body.removeChild(textarea);
+            }
+        }
+
+        (() => {
+            let oldtext = "";
+            let count = 0;
+            if (host == InterfaceList[1].host) {
+                $(document).unbind('keydown').bind('keydown', e => {
+                    if (e.ctrlKey && e.keyCode == 67) {
+                        replica();
+                        $('.dialog-mask').remove();
+                        $('.copy-limit-dialog-v2').remove();
+                        $(".btn-success").text("复制成功").fadeOut(1000);
+                        e.preventDefault();
+                        count += 1;
+                        //return false;
+                    }
                 })
-            }
-        }
-    })();
- 
-    const del = el =>{
-        $(el).remove();
-    }
- 
-    const bdwk_ele =['.read-all','.header-wrapper','.no-full-screen','.no-full-screen','.lazy-load',
-                     '.reader-topbar','.content-wrapper+div','.hx-warp','.try-end-fold-page',
-                     '#page-footer','#reader-container+div','#passport-login-pop'
-                    ]
-    const doc_ele = ['#continueButton','#header','#toolbar','#box1','#boxright','#readEndDiv','.commonbox1',
-                     '#commentDiv','.clearfix','#footer','.dk-bg','.toplayer-shop','.activelist'
-                    ]
-    const docin_ele = ['.head_wrapper','.page_crubms clear','.doc_header_mod','.aside','#j_isend',
-                       '#docinShareSlider','.backToTop','.reader_tools_bar_wrap.tools_bar_small.clear',
-                       '.page_crubms.clear','.adBox','#jControlDiv'
-                      ]
- 
-    const bdwk = () => {
-        $(".logo").hide();
-        $(".die").hide();
-        share();
-    }
- 
-    const doc = () => {
-        const ele = document.querySelector('#pageContainer');
-        try {
-            downloadPDF(ele, title);
-        } catch (error) {
-            //TODO handle the exception
-            console.log(error.stack);
-        }
-    }
- 
-    const docin = () => {
-        const ele = document.querySelector('#contentcontainer');
-        try {
-            downloadPDF(ele, title);
- 
-        } catch (error) {
-            console.log(error.message);
-        }
-    }
- 
-    const main = () => {
-        for(const even in InterfaceList){
-            if(host ==InterfaceList[even].host){
-                let ee = InterfaceList[even].el;
-                $(eval(ee)[0]).click();
-                for(const el of eval(ee)){
-                    del(el);
+
+                document.onmouseup = ev => {
+                    $(".btn-success").remove();
+                    var nowtext = $('div.link')[0].outerText.split("”的文档")[0].split("查看全部包含“")[1];
+                    if (nowtext != oldtext) {
+                        const oEvent = ev || event;
+                        const elbtn = $(`<div class="btn-success" style="left:${oEvent.clientX + 15 + 'px'}; top: ${oEvent.clientY - 10 + 'px'};">复制</div>`);
+                        $("body").append(elbtn);
+                        oldtext = nowtext;
+                        $("#reader-helper").hide();
+                    }
+
+                    $(".btn-success").on("click", e => {
+                        replica();
+                        count += 1;
+                        console.info(`第${count}次为您复制,内容为：${nowtext}`);
+                        //$(".btn-success").fadeOut(1000);
+                    }).on("mouseup", e => {
+                        $(".btn-success").text("复制成功");
+                        $(".btn-success").fadeOut(1000);
+                        e.stopPropagation();
+                        e.preventDefault();
+                    })
                 }
-                eval(InterfaceList[even].func);
-                break;
+            }
+        })();
+
+        const del = el => {
+            $(el).remove();
+        }
+
+        const bdwk_ele = ['.read-all', '.header-wrapper', '.no-full-screen', '.no-full-screen', '.lazy-load',
+            '.reader-topbar', '.content-wrapper+div', '.hx-warp', '.try-end-fold-page',
+            '#page-footer', '#reader-container+div', '#passport-login-pop'
+        ]
+        const doc_ele = ['#continueButton', '#header', '#toolbar', '#box1', '#boxright', '#readEndDiv', '.commonbox1',
+            '#commentDiv', '.clearfix', '#footer', '.dk-bg', '.toplayer-shop', '.activelist'
+        ]
+        const docin_ele = ['.head_wrapper', '.page_crubms clear', '.doc_header_mod', '.aside', '#j_isend',
+            '#docinShareSlider', '.backToTop', '.reader_tools_bar_wrap.tools_bar_small.clear',
+            '.page_crubms.clear', '.adBox', '#jControlDiv'
+        ]
+
+        const bdwk = () => {
+            $(".logo").hide();
+            $(".die").hide();
+            share();
+        }
+
+        const doc = () => {
+            const ele = document.querySelector('#pageContainer');
+            try {
+                downloadPDF(ele, title);
+            } catch (error) {
+                //TODO handle the exception
+                console.log(error.stack);
             }
         }
-    }
- 
-    $("#li0").bind("click", e => {
-        if(host == InterfaceList[1].host){
-           window.open(InterfaceList[0].url + webUrl);
-        }else{
-            e.preventDefault();
-            alert('百度文库解析，豆丁道客巴巴请使用打印PDF');
+
+        const docin = () => {
+            const ele = document.querySelector('#contentcontainer');
+            try {
+                downloadPDF(ele, title);
+
+            } catch (error) {
+                console.log(error.message);
+            }
         }
-	});
-    $("#li2").bind("click", () => {
-        if(confirm('请确保每一页都加载完再打印，是否打印？')){
-            main();
+
+        const main = () => {
+            for (const even in InterfaceList) {
+                if (host == InterfaceList[even].host) {
+                    let ee = InterfaceList[even].el;
+                    $(eval(ee)[0]).click();
+                    for (const el of eval(ee)) {
+                        del(el);
+                    }
+                    eval(InterfaceList[even].func);
+                    break;
+                }
+            }
         }
+
+        $("#li0").bind("click", e => {
+            if (host == InterfaceList[1].host) {
+                window.open(InterfaceList[0].url + webUrl);
+            } else {
+                e.preventDefault();
+                alert('百度文库解析，豆丁道客巴巴请使用打印PDF');
+            }
+        });
+        $("#li2").bind("click", () => {
+            if (confirm('请确保每一页都加载完再打印，是否打印？')) {
+                main();
+            }
+        });
+
     });
- 
-});
- 
+
 })();
