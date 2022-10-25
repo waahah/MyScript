@@ -34,7 +34,6 @@
     * 此脚本参考代码相应位置附有出处
     */
     'use strict';
-
     $(function () {
 
         let webUrl = window.location.href;
@@ -81,7 +80,7 @@
                 font-size:12px;
                 text-align:left;
             }
-			#zuihuitao .logo {
+	    #zuihuitao .logo {
                 position: absolute;
                 right: 0;
                 width: 1.375rem;
@@ -94,7 +93,7 @@
                 transform: translate3d(100%, 5%, 0);
                 background: deepskyblue;
             }
-			#zuihuitao .die {
+	    #zuihuitao .die {
                 display:none;
                 position:absolute;
                 left:28px; top:0;
@@ -102,7 +101,7 @@
                 background-color:#04B4AE;
                 border:1px solid gray;
             }
-			#zuihuitao .die li{
+	    #zuihuitao .die li{
                 font-size:12px;
                 color:#fff;
                 text-align:center;
@@ -115,7 +114,7 @@
                 margin:4px 2px;
                 list-style-type: none;
             }
-			#zuihuitao .die li:hover{
+	    #zuihuitao .die li:hover{
                 color:#fff;
                 background:#FE2E64;
             }
@@ -130,7 +129,7 @@
                 -ms-user-select: text;
                 user-select: text;
             }
-			.add{
+	    .add{
                 background-color:#FE2E64;
             }
             .btn-success{
