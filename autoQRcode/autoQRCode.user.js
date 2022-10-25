@@ -59,6 +59,7 @@
         name = prompt('第一次需输入邮箱/手机号:', '');
         pwd = prompt('第一次需输入密码:', '');
         utils.set_utils();
+        utils.get_utils();
         console.log(localStorage);
     }
 
