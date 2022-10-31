@@ -7,8 +7,8 @@
 // @include      *:*
 // @grant        none
 // @run-at       document-end
-// @require      https://github.com/waahah/MyScript/raw/master/speedPlay/hooker.js
-// @require      https://github.com/waahah/MyScript/raw/master/speedPlay/timerHooker.modify.js
+// @require      https://github.com/waahah/MyScript/blob/main/speedPlay/hooker.js
+// @require      https://github.com/waahah/MyScript/blob/main/speedPlay/timerHooker.modify.js
 // ==/UserScript==
 /* jshint esversion: 6 */
 const defaltLocalStorage = {speed: 1, position: {left: 50, top:100}, speedArray: [1, 2, 3, 15]}; // localStorage 默认值
