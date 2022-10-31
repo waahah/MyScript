@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         倍速播放
-// @namespace    https://gitee.com/yellownacl
+// @namespace    https://github.com/waahah
 // @version      1.0.2
 // @description  HTML5播放器，倍速功能。可以实现最高20倍数播放。不同网站可以设置不同速率和位置。极速跳过广告
 // @author       waahah
 // @include      *:*
 // @grant        none
 // @run-at       document-end
-// @require      https://gitee.com/yellownacl/userscript/raw/master/speedPlay/hooker.js
-// @require      https://gitee.com/yellownacl/userscript/raw/master/speedPlay/timerHooker.modify.js
+// @require      https://github.com/waahah/MyScript/raw/master/speedPlay/hooker.js
+// @require      https://github.com/waahah/MyScript/raw/master/speedPlay/timerHooker.modify.js
 // ==/UserScript==
 /* jshint esversion: 6 */
 const defaltLocalStorage = {speed: 1, position: {left: 50, top:100}, speedArray: [1, 2, 3, 15]}; // localStorage 默认值
