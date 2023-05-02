@@ -10,4 +10,4 @@
 >
 >5. 演示网站地址链接 [古诗文网](https://so.gushiwen.cn/user/login.aspx?from=http://so.gushiwen.cn/user/collect.aspx)
 
-*greasyfork相关地址 [古诗文网自动填充验证码](https://greasyfork.org/zh-CN/scripts/441805-%E5%8F%A4%E8%AF%97%E6%96%87%E7%BD%91%E8%87%AA%E5%8A%A8%E5%A1%AB%E5%85%85%E9%AA%8C%E8%AF%81%E7%A0%81)*
+- *greasyfork相关地址 [古诗文网自动填充验证码](https://greasyfork.org/zh-CN/scripts/441805-%E5%8F%A4%E8%AF%97%E6%96%87%E7%BD%91%E8%87%AA%E5%8A%A8%E5%A1%AB%E5%85%85%E9%AA%8C%E8%AF%81%E7%A0%81)*
