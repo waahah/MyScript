@@ -28,7 +28,7 @@
 | [<img src="https://s2.loli.net/2023/05/03/jnmuEAdzMcbxWp6.jpg" height="16px" />](https://github.com/waahah) | **直达外链** | **略过安全中心**直达外链、**解除csdn复制限制**、去除弹窗广告... | **[安装](https://greasyfork.org/zh-CN/scripts/444972)** |
 | [<img src="https://s2.loli.net/2023/05/03/E34ou72kZY9mAVI.png" height="16px" />](https://github.com/waahah/) | **极简视频解析** | 支持B站、腾讯视频、爱奇艺、优酷、土豆、芒果TV、搜狐... | **[安装](https://greasyfork.org/zh-CN/scripts/437435)** |
 | [<img src="https://i.loli.net/2021/03/30/ULV9XunaHesqGIR.png" height="16px" />](https://github.com/waahah) |  **视频倍速播放** | 最低0.1倍速，最高20倍速，记录播放**速度**，记录显示**位置**... | **[安装](https://github.com/waahah/MyScript/blob/main/speedPlay/speedyPlay.user.js)** |
-| [<img src="https://www.google.com/s2/favicons?sz=64&domain=greasyfork.org" height="16px" />](https://github.com/waahah) |  **自认证校园网** | 免去重复登陆校园网认证系统的烦恼，解放双手... | **[安装](https://greasyfork.org/zh-CN/scripts/441791)** |
+| [<img src="https://www.google.com/s2/favicons?sz=64&domain=greasyfork.org" height="16px" />](https://github.com/waahah) |  **自认证校园网** | 免去重复**登陆**校园网认证系统的烦恼，解放双手... | **[安装](https://greasyfork.org/zh-CN/scripts/441791)** |
 
 
 ****
