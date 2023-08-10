@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name              哔哩哔哩番剧解锁大会员,B站视频下载、解析，A站视频下载、解析，集合了优酷、爱奇艺、腾讯、芒果、乐视、等全网VIP视频免费破解去广告,高清普清电视观看，增加对手机支持，持续更新
 // @namespace          https://greasyfork.org/zh-CN/users/856508
-// @version            2.4.12
+// @version            2.4.13
 // @description       自用解析脚本，哔哩哔哩番剧解锁大会员,集合了优酷、爱奇艺、腾讯等全网VIP视频免费破解去广告,没有太多花哨，但是很好用，也会持续更新接口，方便看电影,此脚本仅用于学习研究，请勿用于商业用途，请大家支持正版。
 // @author            waahah
 // @icon              data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAeCAYAAABe3VzdAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAAB6JQAAgIMAAPn/AACA6QAAdTAAAOpgAAA6mAAAF2+SX8VGAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5QMHBA4LXnI+IgAACRlJREFUWMONmFuIXVcZx3/f2nufy1wySSYzuWcySROjbSpFqmIfRHzwQixWixXFN6u2UiWlFwWfBB+aUlprEaO1IhWqEAutFUUQH6QPYqv2YrXtzCSTSWbSydxzzsycffZefx/WOslxiLYLDhz2Xmet//q+////fesYXaM4dgJgBLgb2Av4+MqANeAk8GfgA8A3gBqgOMcB54CHgMn0uft4uxH3uw54Erg+rmXAHPAdsJ/ahsn1COJjwPqG9TLgDHAv8D3gMNDeMKcG/AH4CrD2/0DG/RLgB8BHgDyCA8MjMuDOdMPv3gPcAKwCfRverWNsRTwEbAFKoGfDnEb8/XXAX982hLADeG882JHLT8UKcB64fSPAazF6EDt84lpdKca8ths6AxwEVmRsl3PN7hS70u8EpuNB3wnAPfGwg8BLwCJggndZeH50I8BRRFVm51b7619tV7N5kAE2MHfpu1bqJow5xLCc+/nSYP9jhpkM1VbzkXpj7aRJKVB5B+AA9gHVmLE7gBeLxCnx/l7EtzC2pRv4sA/IDL1SW209X1tttWpP3035yQeQs/PACmIeGDSvn225uPxS9pv7KD71IMAmpEpM89Q7BDhC4PainE2C5VnhkdEi8NF1R7AX2BlObxPVhUareWRXSK+Ed+6seW0CemX2fF5J/36FMyKmPo3RuAhUimMnkquAEtBquaqqvrUfqGA2VmbpojeoT61QDPcdMtFCnOsGuBXYBiQy3vA9Vfp+9GUAfOIwr8XIl7bBU9X1fC397f3dG19DEM4Q8EOCLdlVABbA76q+9SSwC8gEp6u/Pr7W/NwjNPduqVZb7VGCQ5ztBriToNxSZuM+cVeObIbMzjvvvcxeLbPkjyIEZ/m2R5mrV93g/MpBky4Bs8Dm+LnaEHAcGI17ZsBk++YHs3qz5Yo02UEQTw6MdwPcB9Qx1mQ2pa7kGAJpGchNejrNi9nOu9R7+htrvZFP22KUM66ou3tYjPIUcAvGGqIw6UsmPiozktLXIpZ5YKwb4AGMFLHkSj/bvWrpHMC883oN4xkwsmfvCQDbJcAWQzsJvtiJ4v8aVWA3sIBI42H6IoeJ3wtCNflXWhw7gUkmsxFEheBji90rOi9ATbBn2rXKv+Ws650H2IXYCiBnj5jXSYIriOClLkbPy2y/SU8BTYJBz8v4vInz8f3XTLoLaAHn08ixng5hgdNJXqz7LKE4dqIGlHklbZepeysp/Y9Ls3a9se6KYydSIMcLzPZ38fdljPMWlD0AHAUmgOky8NqcV24ix+hFzJSJew2zlep8g2KgZ2ukwQIw31FCx80Tmb0pZ8gZMjtYpslQWpT0/+qbqz2njl+oN9cB9kfORdrrYIxSQzDpr0T4w8BzwE1dCRk00QNUETVgMi18Iyk9xZbeikkHYopngEYH4I54Wo8xrtRhXsh4n0n7O3Sfu/1xTt1/Kz5xH4+H4eXrRk3GNXGdeSfNOAnnPTI7BKRyNiVnOC8sKLRGsJEMY8K89+aFlX4gZjKPQio7APdg1IBcMOXNkVxaw+B6V/rRyDMGLixy64lToybdVGbpvM8Srn19qseuEHwas0U5h81dAjiEsSTnZuQMk3ClPxKjXQKJj5ZWhM8QMIhREjonOgBHo7pWTEwbYnXH5gxxRGYjrvREMYG4DdHfTpNlV5QkRbkVsSdy+fTKvqFVJY5892DV0AFgpnS2UCQJydQcssttWhpFMSGMJER3L9CLWOsCaAAjsf+aMWkRZ2R50W9oxNABW2iQ1yvk9cp2mX3BpLO9S43cvEDaFfkLZuNbXz+vJG+TFMUAYh/idJYXqybRPLyrBjaKsYZZRqjb52Rg3uMC/xJCuZwhnEL16Espxpn2YP9qttDApCHEMPChcmjTXZW1vEXo894N/KSsZshAZiPOq5dQkceLakZU8DCh7L0JlAakxWWOtWLGZpPSzwG40uOd65TLBYJRkxJq8HYgk9lY9cKSfJoEXsKmuNGjXSrMgTEIJt2uZAdASYzG6ZhqvLPRpPR9mL2JRFJ6BMMmbQGWQAPAOYwGGL6SZngdjOmfIRg+jlAP+4Op2rjPLheXA/E0r0Y+TAAXwuJMYQa//zYmdRS8aNI0gCtKXLAeL2cTcoaVHuf9XkK1aQNVzMZdu2wjgVdfDEpBuNsU6XP34aKn9QJtGad9qIfI7DDGWgRfIzShcxizPnGzPnHkn324bkFgANMmzRvgmi0QhzGWvbNp76IWxTVcqceZjDGfOEpnlM4NAcOY5TEYdCJ4CKMCXBJMyxlLQwMJobsW8AZwDzCBMSTsfJkmyybh2sVmpD1RIGeK3lpTiesY7kFhM4Vzc+00IcmLYDsBXAl4bzYh57Bwl9sN9CG1OgruADxMKHFvmdcCQL2x1hclXwAvAM9EZVUxTtfGpltWesxrB6GDQTBeWWqWVpRY6TcTKs2kN2s472n21ysyOxB5XRE0ZTZVJoaTMNFRcDOmmI5I9keLmXRSQ4EPg0jboyAm6JRCkWCMaVdwFZntM6k/fh/zWcLqQA8yI2u1/wS8kIpids8gJiVbZ5dfqq7m7zfpeoNXTLoIkLQLVM06Cl4kdDKXI7gTSDAbt6L05gWlRiL38hjuXYRmwCON+8ThSo+MgzH6q3I24Z2x6RdfZ+DJO2frjfU7ZvdteyLJ20e3T819ZtPFZZe12g+bdCHufdZ5v+yA9S19SYxgSWjVVrojWAOsyJJr84GeewEqa/mNaavdHe4hQgtPu1b5RFHJDgFWba7fjC+RmW/Xsk975z648sXHDODS5l4NT14cctKtrl1u7/F6tl3NJlyZ7zaJMnHDrXrleFRPNTFudLpcg3PFfsOKYydejyrezX+Pmeh3txDuG49HG9jcNUdxTue6cLXRjIcbjApeIFzKj26Yt47ZJNLDwMnOvxIp8A/gBhL3F8yKsK0SSj8E/BNXLuCTMWAWs5zEWmChe/C+glc/ZmMkthbu3F3gJYf3oa1ydgbnckoP0hacexFn63QuVt4b4db4t27UKfB94Am89mNaj0tXCU7+OD4RoeycQnqAkmVMZZwXTFcapqTZqXFXAFJFeGAJ6QDeN5F6gXWkbXitXgYoDQC/jAG7PP4Dti5MrvrBCwUAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjEtMDMtMDZUMjA6MTQ6MTErMDg6MDBtEXWtAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIxLTAzLTA2VDIwOjE0OjExKzA4OjAwHEzNEQAAACB0RVh0c29mdHdhcmUAaHR0cHM6Ly9pbWFnZW1hZ2ljay5vcme8zx2dAAAAGHRFWHRUaHVtYjo6RG9jdW1lbnQ6OlBhZ2VzADGn/7svAAAAGHRFWHRUaHVtYjo6SW1hZ2U6OkhlaWdodAA3NDlmrKoiAAAAGHRFWHRUaHVtYjo6SW1hZ2U6OldpZHRoADE1OTOJNIonAAAAGXRFWHRUaHVtYjo6TWltZXR5cGUAaW1hZ2UvcG5nP7JWTgAAABd0RVh0VGh1bWI6Ok1UaW1lADE2MTUwMzI4NTF1V3dqAAAAFHRFWHRUaHVtYjo6U2l6ZQAxNDE5MTZCQqRa34sAAABGdEVYdFRodW1iOjpVUkkAZmlsZTovLy9hcHAvdG1wL2ltYWdlbGMvaW1ndmlldzJfOV8xNjA5OTAzNTE0MDY4MjMwOF8yOF9bMF3spSwtAAAAAElFTkSuQmCC
@@ -37,6 +37,8 @@
 // @match             *://www.le.com/ptv/vplay/*
 // @match             *://m.le.com/ptv/vplay/*
 // @match             *://m.le.com/vplay/*
+// @match             *://m.le.com/vplay_*
+// @match             *://m.le.com/
 // @match             *://v.pptv.com/show/*
 // @match             *://m.pptv.com/show/*
 // @match             *://vip.pptv.com/show/*
@@ -343,6 +345,15 @@
             type: "1",
             url: "https://www.8090g.cn/?url="
         },
+        , {
+            name: "玩的嗨",
+            type: "0",
+            url: "https://tv.wandhi.com/go.html?url="
+        }, {
+            name: "无限",
+            type: "0",
+            url: "https://www.wxtv.net/vodsearch/-------------.html?wd="
+        },
 
         //--------------------------------------------------------------------------------------
         {
@@ -365,14 +376,6 @@
             name: "爱爱蓝光",
             type: "2",
             url: "https://vip5.jiexi.one/?url="
-        }, {
-            name: "玩的嗨",
-            type: "0",
-            url: "https://tv.wandhi.com/go.html?url="
-        }, {
-            name: "无限",
-            type: "0",
-            url: "https://www.wxtv.net/vodsearch/-------------.html?wd="
         }
     ];
     if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
@@ -411,16 +414,17 @@
         let mobile_outerli = "";
         originalInterfaceList.forEach((item, index) => {
             if (item.type == "0") {
+                mobile_outerList.push(item);
                 mobile_innerList.push(item);
-                mobile_innerlis += "<li>" + item.name + "</li>";
+                mobile_outerli += "<li>" + item.name + "</li>";
             }
             if (item.type == "1") {
                 mobile_innerList.push(item);
                 mobile_innerli += "<li>" + item.name + "</li>";
             }
             if (item.type == "2") {
-                mobile_outerList.push(item);
-                mobile_outerli += "<li>" + item.name + "</li>";
+                mobile_innerList.push(item);
+                mobile_innerlis += "<li>" + item.name + "</li>";
             }
         });
         parseInterfaceList = mobile_innerList;
@@ -462,13 +466,13 @@
                                 <div style='clear:both;'></div>
                                 </ul>
                                 <ul style='margin:0 5px;'>
-                                ` + mobile_innerlis + `
+                                ` + mobile_outerli + `
 
                                 <div style='clear:both;'></div>
                                 </ul>
                                 <div style='font-size:16px; text-align:center; color:#DF0174; line-height:21px;'>B站大会员番剧解析(专用线路)</div>
                                 <ul style='margin:0 5px;'>
-                                ` + mobile_outerli + `
+                                ` + mobile_innerlis + `
 
                                 <div style='clear:both;'></div>
                                 </ul>
@@ -481,7 +485,6 @@
         $("#vip_movie_box").click( () => {
             //$(".vip_mod_box_action").toggle()
             let display = document.querySelector('.vip_mod_box_action').style.display;
-            console.log(display=='');
             if(display == ''){
                 display = 'none';
             }
@@ -502,16 +505,15 @@
         });
         $(".vip_mod_box_action li").each((index, item) => {
             item.addEventListener("click", () => {
-                console.log(parseInterfaceList);
-                if (parseInterfaceList[index].type == "1", "2") {
+                if (parseInterfaceList[index].type == "1" || parseInterfaceList[index].type == "2") {
                     if (document.getElementById("iframe-player") == null) {
-                        console.log("iframe-player==null");
                         let mobile_player = $(mobile_node);
                         mobile_player.empty();
                         mobile_player.append(mobile_videoPlayer);
                     }
                     innerParse(parseInterfaceList[index].url + location.href);
-                } else {
+                }
+                if (parseInterfaceList[index].type == "0") {
                     GMopenInTab(parseInterfaceList[index].url + location.href, false);
                 }
             });
@@ -601,16 +603,17 @@
         var outerli = "";
         originalInterfaceList.forEach((item, index) => {
             if (item.type == "0") {
+                outerList.push(item);
                 innerList.push(item);
-                innerli1 += "<li>" + item.nme + "</li>";
+                outerli += "<li>" + item.name + "</li>";
             }
             if (item.type == "1") {
                 innerList.push(item);
                 innerli += "<li>" + item.name + "</li>";
             }
             if (item.type == "2") {
-                outerList.push(item);
-                outerli += "<li>" + item.name + "</li>";
+                innerList.push(item);
+                innerli1 += "<li>" + item.name + "</li>";
             }
         });
         parseInterfaceList = innerList.concat(outerList);
@@ -731,13 +734,13 @@
                         <div style='clear:both;'></div>
                     </ul>
                     <ul style='margin:0 5px;'>
-` + innerli1 + `
+` + outerli + `
 
                         <div style='clear:both;'></div>
                     </ul>
                     <div style='font-size:16px; text-align:center; color:#DF0174; line-height:21px;'>B站大会员番剧解析(专用线路)</div>
                     <ul style='margin:0 5px;'>
-` + outerli + `
+` + innerli1 + `
 
                         <div style='clear:both;'></div>
                     </ul>
@@ -965,7 +968,7 @@
 
         $(".vip_mod_box_action li").each((index, item) => {
             item.addEventListener("click", () => {
-                if (parseInterfaceList[index].type == "1", "2") {
+                if (parseInterfaceList[index].type == "1" || parseInterfaceList[index].type == "2") {
                     if (document.getElementById("iframe-player") == null) {
                         var player = $(node);
                         player.empty();
@@ -1568,8 +1571,9 @@
             }
         }
         setInterval(xsyhnbrun, 500);
+
+        mo();
     }
 
-    mo();
 
 })();
