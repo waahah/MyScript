@@ -14,7 +14,7 @@
 // @match             *://m.v.qq.com/x/play.html?cid=*
 // @match             *://m.v.qq.com/play.html?cid=*
 // @match             *://m.v.qq.com/cover/.*html
-// @match             *://m.v.qq.com/x/m/play?.*cid.*
+// @match             *://m.v.qq.com/x/m/play?*cid*
 // @match             *://m.v.qq.com/
 // @match             *://www.iqiyi.com/v*
 // @match             *://m.iqiyi.com/v*
