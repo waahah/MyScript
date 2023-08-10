@@ -24,7 +24,7 @@
 |  | 脚本名称 | 脚本功能 | 安装 |
 | :----: | :---- | :---- | :----: |
 | [<img src="https://s2.loli.net/2023/05/03/RerDYqAyfTkuHpQ.jpg?s=16&v=4" height="16px" />](https://github.com/waahah) | **文库下载器** | 百度文库解析**下载**功能 解除百度文库**复制**限制【保持原格式】... | **[安装](https://greasyfork.org/zh-CN/scripts/437609)**|
-| [<img src="https://s2.loli.net/2023/05/03/E34ou72kZY9mAVI.png" height="16px" />](https://github.com/waahah/) | **极简视频解析** | 支持B站、腾讯视频、爱奇艺、优酷、土豆、芒果TV、搜狐... | **[安装](https://github.com/waahah/MyScript/blob/main/jiexiVideo/videoJiexi.user.js |
+| [<img src="https://s2.loli.net/2023/05/03/E34ou72kZY9mAVI.png" height="16px" />](https://github.com/waahah/) | **极简视频解析** | 支持B站、腾讯视频、爱奇艺、优酷、土豆、芒果TV、搜狐... | **[安装](https://github.com/waahah/MyScript/blob/main/jiexiVideo/videoJiexi.user.js)** |
 | [<img src="https://s2.loli.net/2023/05/03/nIiJsfZwWBGprN7.jpg" height="16px" />](https://github.com/waahah) | **自动填充验证码** | **自动识别**填充验证码以及账号信息并登录,不需要到代码中修... | **[安装](https://greasyfork.org/zh-CN/scripts/441805)** |
 | [<img src="https://s2.loli.net/2023/05/03/jnmuEAdzMcbxWp6.jpg" height="16px" />](https://github.com/waahah) | **直达外链** | **略过安全中心**直达外链、**解除csdn复制限制**、去除弹窗广告... | **[安装](https://greasyfork.org/zh-CN/scripts/444972)** |
 | [<img src="https://s2.loli.net/2023/05/03/E34ou72kZY9mAVI.png" height="16px" />](https://github.com/waahah/) | **简洁视频解析** | 只做VIP视频解析，专注简洁，不做冗余庞杂的集合脚本。... | **[安装](https://greasyfork.org/zh-CN/scripts/437435)** |
