@@ -279,7 +279,7 @@
             }
         });
     });
-       $("#m").click(function(){
+       $("#m").on( 'click', function(){
         var play_jx_url = window.location.href;
         if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
             var mobile_html = "<div style='margin:0 auto;padding:10px;'>";
