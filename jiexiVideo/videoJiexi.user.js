@@ -60,6 +60,7 @@
 // @match             *://y.qq.com
 // @match             *://*.kugou.com
 // @match             *://*.kuwo.cn
+// @match             *://tv.wandhi.com/*
 // @license           GPL License
 // @grant             unsafeWindow
 // @grant             GM_openInTab
@@ -977,7 +978,12 @@
                     innerParse(parseInterfaceList[index].url + location.href);
                 }
                 if (parseInterfaceList[index].type == "0") {
-                    GMopenInTab(parseInterfaceList[index].url + location.href, false);
+                    try{
+                        GMopenInTab(parseInterfaceList[index].url + location.href, false);
+                    }catch(e){
+                        console.log(e);
+                        window.open(parseInterfaceList[index].url + location.href, "_blank");
+                    }
                 }
             });
         });
@@ -1524,6 +1530,16 @@
                 $("#m").remove();
                 setInterval(() => {
                 }, 500);
+                break
+	    //--------------------------------------------------------------------------------
+            case 'tv.wandhi.com':
+                $('#tip').hide();
+                $('.container').hide();
+                $('.135brush').remove();
+                $('.table .table-bordered').remove();
+                $('.unit-100').remove();
+                $('#vip_movie_box').hide();
+                document.getElementsByClassName('panel-body')[1].style.display='none';
                 break
             //--------------------------------------------------------------------------------
             default:
