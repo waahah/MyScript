@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name              文库下载器
-// @version           0.3.5
+// @version           1.3.6
 // @namespace         https://waahah.gitee.io
 // @description       百度文库解析下载功能 解除百度文库复制限制【保持原格式】界面简洁，脚本仅限学习，请大家支持正版。
 // @author            waahah
@@ -14,6 +14,7 @@
 // @match             *://wenku.baidu.com/share/*
 // @match             *://www.doc88.com/p-*
 // @match             *://www.docin.com/p-*
+// @match             *://jz.docin.com/p-*
 // @license           Apache-2.0
 // @icon              data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='M13 13v5.585l1.828-1.828 1.415 1.415L12 22.414l-4.243-4.242 1.415-1.415L11 18.585V13h2zM12 2a7.001 7.001 0 0 1 6.954 6.194 5.5 5.5 0 0 1-.953 10.784v-2.014a3.5 3.5 0 1 0-1.112-6.91 5 5 0 1 0-9.777 0 3.5 3.5 0 0 0-1.292 6.88l.18.03v2.014a5.5 5.5 0 0 1-.954-10.784A7 7 0 0 1 12 2z'/%3E%3C/svg%3E
 // @grant             unsafeWindow
@@ -31,9 +32,9 @@
 (function () {
     /**
     * 遵循开源协议,转载请注明出处谢谢
-    * 此脚本参考代码相应位置附有出处
     */
     'use strict';
+
     $(function () {
 
         let webUrl = window.location.href;
@@ -43,10 +44,11 @@
         const tfpath = location.href.split("/");
         const title = document.title.split(' - ')[0];
         const InterfaceList = [
-            { "host": "wkdownload", "url": "http://www.html22.com/d/?url=" },
+            { "host": "wkdownload", "url": "http://www.mmhtml.com/zh/?url=" },
             { "host": "wenku.baidu.com", "func": "bdwk()", "el": "bdwk_ele" },
             { "host": "www.doc88.com", "func": "doc()", "el": "doc_ele" },
-            { "host": "www.docin.com", "func": "docin()", "el": "docin_ele" }
+            { "host": "www.docin.com", "func": "docin()", "el": "docin_ele" },
+            { "host":"jz.docin.com", "func":"docin()", "el":"docin_ele" }
         ]
         function GMxmlhttpRequest(obj) {
             if (typeof GM_xmlhttpRequest === "function") {
@@ -70,84 +72,15 @@
             doc.appendChild(myStyle);
         }
 
-        css(`#zuihuitao {
-                cursor:pointer;
-                position:fixed;
-                top:100px;
-                left:0px;
-                width:0px;
-                z-index:2147483647;
-                font-size:12px;
-                text-align:left;
-            }
-	    #zuihuitao .logo {
-                position: absolute;
-                right: 0;
-                width: 1.375rem;
-                padding: 10px 2px;
-                text-align: center;
-                color: #fff;
-                cursor: auto;
-                user-select: none;
-                border-radius: 0 4px 4px 0;
-                transform: translate3d(100%, 5%, 0);
-                background: deepskyblue;
-            }
-	    #zuihuitao .die {
-                display:none;
-                position:absolute;
-                left:28px; top:0;
-                text-align:center;
-                background-color:#04B4AE;
-                border:1px solid gray;
-            }
-	    #zuihuitao .die li{
-                font-size:12px;
-                color:#fff;
-                text-align:center;
-                width:60px;
-                line-height:21px;
-                float:left;
-                border:1px solid gray;
-                border-radius: 6px 6px 6px 6px;
-                padding:0 4px;
-                margin:4px 2px;
-                list-style-type: none;
-            }
-	    #zuihuitao .die li:hover{
-                color:#fff;
-                background:#FE2E64;
-            }
-            @media print {
-                body {
-                    display: block !important;
-                }
-            }
-            *{
-                -webkit-user-select: text;
-                -moz-user-select: text;
-                -ms-user-select: text;
-                user-select: text;
-            }
-	    .add{
-                background-color:#FE2E64;
-            }
-            .btn-success{
-                position: fixed;
-                font-weight: 400;
-                color: #fff;
-                background-color: #28a745;
-                border-color: #28a745;
-                text-align: center;
-                vertical-align: middle;
-                border: 1px solid transparent;
-                padding: .375rem .75rem;
-                font-size: 1rem;
-                line-height: 1.5;
-                border-radius: .25rem; 
-                z-index:2147483647;
-                cursor: pointer;
-            }`);
+        css(`#zuihuitao {cursor:pointer; position:fixed; top:100px; left:0px; width:0px; z-index:2147483647; font-size:12px; text-align:left;}
+			#zuihuitao .logo { position: absolute;right: 0; width: 1.375rem;padding: 10px 2px;text-align: center;color: #fff;cursor: auto;user-select: none;border-radius: 0 4px 4px 0;transform: translate3d(100%, 5%, 0);background: deepskyblue;}
+			#zuihuitao .die {display:none; position:absolute; left:28px; top:0; text-align:center;background-color:#04B4AE; border:1px solid gray;}
+			#zuihuitao .die li{font-size:12px; color:#fff; text-align:center; width:60px; line-height:21px; float:left; border:1px solid gray;border-radius: 6px 6px 6px 6px; padding:0 4px; margin:4px 2px;list-style-type: none;}
+			#zuihuitao .die li:hover{color:#fff;background:#FE2E64;}
+            @media print {body {display: block !important;}}
+            *{-webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; user-select: text;}
+			.add{background-color:#FE2E64;}
+            .btn-success{position: fixed;font-weight: 400;color: #fff;background-color: #28a745;border-color: #28a745;text-align: center;vertical-align: middle;border: 1px solid transparent;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;border-radius: .25rem; z-index:2147483647;cursor: pointer;}`);
 
 
         const html = $(`<div id='zuihuitao'>
@@ -163,9 +96,10 @@
 		                            <div style='clear:both;'></div>
 		                        </ul>
 		                        <br>
-		                        <div style='font-size:16px; text-align:center; color:#fff; line-height:21px;'>打印PDF</div>
+		                        <div style='font-size:16px; text-align:center; color:#fff; line-height:21px;'>豆丁道客</div>
 		                        <ul style='margin:0 25px;'>
-		                            <li id="li2">导出</li>
+		                            <li id="li2">导出PDF</li>
+                                    <li id="li3">自动展开</li>
 		                            <div style='clear:both;'></div>
 		                        </ul>
 		                        <br>
@@ -206,7 +140,7 @@
                         const DocId = pageData.indexOf('showDocId') + 12;
                         const StoreId = pageData.indexOf('showStoreId') - 3;
                         const showDocId = pageData.slice(DocId, StoreId);
-                        const url = `${tfpath[0]}//${tfpath[2]}/view/${showDocId}.html`;
+                        const url = tfpath[0] + "//" + tfpath[2] + '/view/' + showDocId + ".html";
                         console.log(url);
                         webUrl = url;
                         webUrl2 = after(url);
@@ -216,7 +150,7 @@
             }
         }
         if (path == "tfview") {
-            const tfurl = `${tfpath[0]}//${tfpath[2]}/view/${tfpath[4]}`;
+            const tfurl = tfpath[0] + "//" + tfpath[2] + "/view/" + tfpath[4];
             const tfurl2 = after(tfurl);
             console.log(tfurl);
             webUrl = tfurl;
@@ -224,31 +158,30 @@
         }
 
         const sleep = ms => {
-            return new Promise(resolve => {
-                setTimeout(resolve, ms)
-            });
+            return new Promise(resolve => setTimeout(resolve, ms));
         }
         const share = () => {
             //console.log(webUrl);
-            let ph = document.body.scrollHeight;
             let FPS = 1000;
             let retime = setInterval(function () {
+                let ph = document.body.scrollHeight;
                 $(window).scrollTop(FPS, { behavior: 'smooth' });
                 //ph = document.body.scrollHeight;
                 FPS = FPS + 1000;
                 if (FPS > ph) {
                     clearInterval(retime);
-                    setTimeout(function () {
+                    /*setTimeout(function () {
                         window.print();
                         $(".logo").show();
                     }, 500);
-
+                    */
                 }
-            }, 300)
+            }, 500)
 
         }
 
-        const downloadPDF = (ele, pdfName) => {
+        const downloadPDF = (canvas, pdfName) => {
+            /*
             window.scrollTo(0, 0);
             let eleW = ele.offsetWidth; // 获得该容器的宽
             let eleH = ele.offsetHeight; // 获得该容器的高
@@ -279,7 +212,7 @@
                 dpi: 300,
                 scale: 1,
                 allowTaint: false,  //允许 canvas 污染， allowTaint参数要去掉，否则是无法通过toDataURL导出canvas数据的
-                useCORS: false, //允许canvas画布内 可以跨域请求外部链接图片, 允许跨域请求。
+                useCORS: true, //允许canvas画布内 可以跨域请求外部链接图片, 允许跨域请求。
             }).then((canvas) => {
                 var contentWidth = canvas.width;
                 var contentHeight = canvas.height;
@@ -317,8 +250,30 @@
                 }
                 //可动态生成
                 pdf.save(pdfName)
-            })
+            })*/
+            window.scrollTo(0, 0);
+            let num = 0;
+            let len_cas = canvas.length;
+            var contentWidth = canvas[0].width;
+            var contentHeight = canvas[0].height;
+            //console.log(canvas);
+            console.log(`canvas数据：宽: ${contentWidth}px，高: ${contentHeight}px`);
+                
+            const orientation = contentWidth > contentHeight ? 'l' : 'p';
+            var pdf = new jspdf.jsPDF(orientation, 'px', [contentHeight,contentWidth]);
+            for (const cas of canvas) {
+                let pageData = cas;
+                num+=1;
+                pdf.addImage(pageData, 'JPEG', 0, 0, contentWidth, contentHeight);
+                if(num < len_cas){
+                    pdf.addPage();
+                }
+            }
+
+            pdf.save(`${pdfName}.pdf`);
         }
+
+
 
         const replica = () => {
             /**
@@ -399,7 +354,7 @@
         const doc_ele = ['#continueButton', '#header', '#toolbar', '#box1', '#boxright', '#readEndDiv', '.commonbox1',
             '#commentDiv', '.clearfix', '#footer', '.dk-bg', '.toplayer-shop', '.activelist'
         ]
-        const docin_ele = ['.head_wrapper', '.page_crubms clear', '.doc_header_mod', '.aside', '#j_isend',
+        const docin_ele = ['.model-fold-show', '.page_crubms clear', '.doc_header_mod', '.aside', '#j_isend',
             '#docinShareSlider', '.backToTop', '.reader_tools_bar_wrap.tools_bar_small.clear',
             '.page_crubms.clear', '.adBox', '#jControlDiv'
         ]
@@ -408,10 +363,14 @@
             $(".logo").hide();
             $(".die").hide();
             share();
+            setTimeout( () => {
+                window.print();
+                $(".logo").show();
+            }, 1000);
         }
 
         const doc = () => {
-            const ele = document.querySelector('#pageContainer');
+            const ele = document.querySelectorAll('canvas.inner_page');
             try {
                 downloadPDF(ele, title);
             } catch (error) {
@@ -421,7 +380,7 @@
         }
 
         const docin = () => {
-            const ele = document.querySelector('#contentcontainer');
+            const ele = document.querySelectorAll('canvas');
             try {
                 downloadPDF(ele, title);
 
@@ -449,13 +408,23 @@
                 window.open(InterfaceList[0].url + webUrl);
             } else {
                 e.preventDefault();
-                alert('百度文库解析，豆丁道客巴巴请使用打印PDF');
+                alert('百度文库解析，豆丁道客巴巴请使用导出PDF');
             }
         });
         $("#li2").bind("click", () => {
             if (confirm('请确保每一页都加载完再打印，是否打印？')) {
                 main();
             }
+        });
+        $("#li3").on("click", () => {
+            for (const even in InterfaceList) {
+                if (host == InterfaceList[even].host) {
+                    let ee = InterfaceList[even].el;
+                    $(eval(ee)[0]).click();
+                }
+            }
+            $('.die').hide();
+            share();
         });
 
     });
