@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         下载CSDN、简书、掘金、知乎专栏、博客园、脚本之家、51CTO、程序员大本营、吾爱破解、腾讯云、阿里云、华为云、百度等文章保存为Markdown文件
 // @namespace    https://waahah.xyz/
-// @version      0.1.3
+// @version      0.1.4
 // @description  下载保存博客文章为markdown,已支持CSDN、简书、掘金、知乎专栏、博客园、脚本之家、51CTO、程序员大本营、吾爱破解、腾讯云、阿里云、华为云、百度、360等，脚本仅限学习，请大家尊重版权。
 // @author       waahah
 // @match        *://blog.csdn.net/*
@@ -20,6 +20,7 @@
 // @match        *://cloud.tencent.com/developer/article/*
 // @match        *://developer.aliyun.com/article/*
 // @match        *://huaweicloud.csdn.net/*
+// @match        *://www.bilibili.com/read/*
 // @license      Apache-2.0
 // @icon         data:image/svg+xml,%3Csvg t='1691941995383' class='icon' viewBox='0 0 1024 1024' version='1.1' xmlns='http://www.w3.org/2000/svg' p-id='1514' width='200' height='200'%3E%3Cpath d='M320 864 320 0l480 0 0 192 0 32L1024 224l0 640L320 864zM928 320l-512 0 0 32 512 0L928 320zM928 448l-512 0 0 32 512 0L928 448zM928 576l-512 0 0 32 512 0L928 576zM928 704l-512 0 0 32 512 0L928 704zM832 0l19.2 0L1024 160 1024 192l-192 0L832 0zM288 896l320 0L704 896l0 128L0 1024 0 160l288 0 0 320-192 0L96 512l192 0 0 96-192 0L96 640l192 0 0 96-192 0L96 768l192 0 0 96-192 0L96 896 288 896z' p-id='1515'%3E%3C/path%3E%3C/svg%3E
 // @grant        none
@@ -51,7 +52,8 @@
         { "host": "www.52pojie.cn", "el": ".t_f", "cut_str": " - " },
         { "host": "cloud.tencent.com", "el": ".mod-content__markdown", "cut_str": "-" },
         { "host": "developer.aliyun.com", "el": ".content-wrapper", "cut_str": "-" },
-        { "host": "huaweicloud.csdn.net", "el": ".main-content", "cut_str": "_" }
+        { "host": "huaweicloud.csdn.net", "el": ".main-content", "cut_str": "_" },
+        { "host": "www.bilibili.com", "el": "#read-article-holder", "cut_str": " - " }
     ]
 
     const utils = {
