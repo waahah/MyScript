@@ -1,9 +1,11 @@
 // ==UserScript==
-// @name         下载CSDN、简书、掘金、知乎专栏、博客园、脚本之家、51CTO、程序员大本营、吾爱破解、腾讯云、阿里云、华为云、百度等文章保存为Markdown文件
+// @name         下载CSDN、简书、掘金、知乎专栏、博客园、微信公众号、脚本之家、51CTO、程序员大本营、吾爱破解、B站、思否、腾讯云、阿里云、华为云等文章保存为Markdown文件
 // @namespace    https://waahah.xyz/
-// @version      0.1.5
-// @description  下载保存博客文章为markdown,已支持CSDN、简书、掘金、知乎专栏、博客园、脚本之家、51CTO、程序员大本营、吾爱破解、腾讯云、阿里云、华为云、百度、360等，脚本仅限学习，请大家尊重版权。
+// @version      0.1.6
+// @description  下载保存博客文章为markdown,已支持CSDN、简书、掘金、知乎专栏、博客园、微信公众号、脚本之家、51CTO、程序员大本营、吾爱破解、腾讯云、阿里云、华为云、B站、思否、百度等，脚本仅限学习，请大家尊重版权。
 // @author       waahah
+// @require      https://unpkg.com/turndown/dist/turndown.js
+// @require      https://unpkg.com/turndown-plugin-gfm/dist/turndown-plugin-gfm.js
 // @match        *://blog.csdn.net/*
 // @match        *://www.jianshu.com/p/*
 // @match        *://juejin.cn/post/*
@@ -24,6 +26,7 @@
 // @match        *://weibo.com/ttarticle/p/show*
 // @match        *://www.weibo.com/ttarticle/p/show*
 // @match        *://mp.weixin.qq.com/s*
+// @match        *://segmentfault.com/*/*
 // @license      Apache-2.0
 // @icon         data:image/svg+xml,%3Csvg t='1691941995383' class='icon' viewBox='0 0 1024 1024' version='1.1' xmlns='http://www.w3.org/2000/svg' p-id='1514' width='200' height='200'%3E%3Cpath d='M320 864 320 0l480 0 0 192 0 32L1024 224l0 640L320 864zM928 320l-512 0 0 32 512 0L928 320zM928 448l-512 0 0 32 512 0L928 448zM928 576l-512 0 0 32 512 0L928 576zM928 704l-512 0 0 32 512 0L928 704zM832 0l19.2 0L1024 160 1024 192l-192 0L832 0zM288 896l320 0L704 896l0 128L0 1024 0 160l288 0 0 320-192 0L96 512l192 0 0 96-192 0L96 640l192 0 0 96-192 0L96 768l192 0 0 96-192 0L96 896 288 896z' p-id='1515'%3E%3C/path%3E%3C/svg%3E
 // @grant        none
@@ -58,8 +61,10 @@
         { "host": "huaweicloud.csdn.net", "el": ".main-content", "cut_str": "_" },
         { "host": "www.bilibili.com", "el": "#read-article-holder", "cut_str": " - " },
         { "host": "weibo.com", "el": ".main_editor", "cut_str": "" },
-        { "host": "www.weibo.com", "el": ".main_editor", "cut_str": "" }
-        //{ "host": "mp.weixin.qq.com", "el": "#js_content", "cut_str": "" }
+        { "host": "www.weibo.com", "el": ".main_editor", "cut_str": "" },
+        { "host": "mp.weixin.qq.com", "el": "#js_content", "cut_str": "" },
+        { "host": "segmentfault.com", "el": ".article.fmt.article-content", "cut_str": "- SegmentFault 思否" }
+        
     ]
 
     const utils = {
@@ -173,6 +178,7 @@
         downloadLink.setAttribute('href', blobURL);
         //document.body.appendChild(downloadLink);
         downloadLink.click();
+        URL.revokeObjectURL(blob);
     }
 
     await utils.load_web_script([
@@ -190,7 +196,7 @@
                 if(cut != ''){
                     new_headline = await cut_title(headline, cut);
                 }else{
-                    new_headline = headline;
+                    new_headline = document.title;
                 }
                 await save_md(ele, new_headline);
                 return new_headline;
@@ -203,7 +209,7 @@
         await main().then(
             res => {
                 document.getElementsByClassName('die')[0].style.block = 'none';
-                console.log(`文件 ${res}.md 下载完成！`);
+                console.log(`文件 ${res}.md 已开始下载~`);
             }
         ).catch(
             err => {
