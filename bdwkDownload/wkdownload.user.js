@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name              文库下载器
-// @version           1.3.6
+// @version           1.3.7
 // @namespace         https://waahah.gitee.io
-// @description       百度文库解析下载功能 解除百度文库复制限制【保持原格式】界面简洁，脚本仅限学习，请大家支持正版。
+// @description       百度文库、豆丁网、道客巴巴解析下载功能 解除百度文库复制限制【保持原格式】界面简洁，脚本仅限学习，请大家支持正版。
 // @author            waahah
-// @antifeature       membership  百度文库需要输入验证码之后才能下载，豆丁网和道客巴巴可直接导出
+// @antifeature       membership  百度文库需要输入验证码之后才能下载，豆丁网和道客巴巴可直接导出PDF
 // @require           https://cdn.bootcss.com/jquery/3.5.1/jquery.min.js
 // @require           https://cdn.staticfile.org/jspdf/2.5.1/jspdf.umd.min.js
 // @require           https://cdn.staticfile.org/html2canvas/1.4.1/html2canvas.min.js
