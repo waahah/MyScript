@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name              文库下载器
-// @version           1.3.7
+// @version           1.5.0
 // @namespace         https://waahah.gitee.io
-// @description       百度文库、豆丁网、道客巴巴解析下载功能 解除百度文库复制限制【保持原格式】界面简洁，脚本仅限学习，请大家支持正版。
+// @description       百度文库、淘豆网、豆丁网、道客巴巴、原创力文档解析下载功能 解除百度文库、淘豆网复制限制【保持原格式】界面简洁，脚本仅限学习，请大家支持正版。
 // @author            waahah
-// @antifeature       membership  百度文库需要输入验证码之后才能下载，豆丁网和道客巴巴可直接导出PDF
+// @antifeature       membership  百度文库需要输入验证码之后才能下载，淘豆网及豆丁网和道客巴巴可直接导出PDF
 // @require           https://cdn.bootcss.com/jquery/3.5.1/jquery.min.js
 // @require           https://cdn.staticfile.org/jspdf/2.5.1/jspdf.umd.min.js
 // @require           https://cdn.staticfile.org/html2canvas/1.4.1/html2canvas.min.js
@@ -15,6 +15,9 @@
 // @match             *://www.doc88.com/p-*
 // @match             *://www.docin.com/p-*
 // @match             *://jz.docin.com/p-*
+// @match             *://www.taodocs.com/p-*
+// @match             *://file.taodocs.com/p-*
+// @match             *://max.book118.com/html/*
 // @license           Apache-2.0
 // @icon              data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='M13 13v5.585l1.828-1.828 1.415 1.415L12 22.414l-4.243-4.242 1.415-1.415L11 18.585V13h2zM12 2a7.001 7.001 0 0 1 6.954 6.194 5.5 5.5 0 0 1-.953 10.784v-2.014a3.5 3.5 0 1 0-1.112-6.91 5 5 0 1 0-9.777 0 3.5 3.5 0 0 0-1.292 6.88l.18.03v2.014a5.5 5.5 0 0 1-.954-10.784A7 7 0 0 1 12 2z'/%3E%3C/svg%3E
 // @grant             unsafeWindow
@@ -48,7 +51,10 @@
             { "host": "wenku.baidu.com", "func": "bdwk()", "el": "bdwk_ele" },
             { "host": "www.doc88.com", "func": "doc()", "el": "doc_ele" },
             { "host": "www.docin.com", "func": "docin()", "el": "docin_ele" },
-            { "host":"jz.docin.com", "func":"docin()", "el":"docin_ele" }
+            { "host": "jz.docin.com", "func": "docin()", "el": "docin_ele" },
+            { "host": "www.taodocs.com", "func": "taodou()", "el": "taodou_ele" },
+            { "host": "file.taodocs.com", "func": "taodou()", "el": "taodou_ele" },
+            { "host": "max.book118.com", "func": "book118()", "el": "book118_ele" }
         ]
         function GMxmlhttpRequest(obj) {
             if (typeof GM_xmlhttpRequest === "function") {
@@ -96,7 +102,7 @@
 		                            <div style='clear:both;'></div>
 		                        </ul>
 		                        <br>
-		                        <div style='font-size:16px; text-align:center; color:#fff; line-height:21px;'>豆丁道客</div>
+		                        <div style='font-size:16px; text-align:center; color:#fff; line-height:21px;'>其它文库</div>
 		                        <ul style='margin:0 25px;'>
 		                            <li id="li2">导出PDF</li>
                                     <li id="li3">自动展开</li>
@@ -160,6 +166,18 @@
         const sleep = ms => {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
+
+        const taodou_zhankai = () => {
+            if (host == InterfaceList[5].host) {
+                if (typeof inpmv != undefined) {
+                    let btn = document.querySelector('.moreBtn.goBtn span');
+                    if (btn) {
+                        btn.click();
+                    }
+                }
+            }
+        }
+
         const share = () => {
             //console.log(webUrl);
             let FPS = 1000;
@@ -168,6 +186,7 @@
                 $(window).scrollTop(FPS, { behavior: 'smooth' });
                 //ph = document.body.scrollHeight;
                 FPS = FPS + 1000;
+                taodou_zhankai();
                 if (FPS > ph) {
                     clearInterval(retime);
                     /*setTimeout(function () {
@@ -253,39 +272,37 @@
             })*/
             window.scrollTo(0, 0);
             let num = 0;
+            let err_num = 0;
             let len_cas = canvas.length;
             var contentWidth = canvas[0].width;
             var contentHeight = canvas[0].height;
             //console.log(canvas);
             console.log(`canvas数据：宽: ${contentWidth}px，高: ${contentHeight}px`);
-                
+
             const orientation = contentWidth > contentHeight ? 'l' : 'p';
-            var pdf = new jspdf.jsPDF(orientation, 'px', [contentHeight,contentWidth]);
+            var pdf = new jspdf.jsPDF(orientation, 'px', [contentHeight, contentWidth]);
             for (const cas of canvas) {
                 let pageData = cas;
-                num+=1;
-                pdf.addImage(pageData, 'JPEG', 0, 0, contentWidth, contentHeight);
-                if(num < len_cas){
+                num += 1;
+                try{
+                    pdf.addImage(pageData, 'JPEG', 0, 0, contentWidth, contentHeight);
+                }catch(err){
+                    console.log(err);
+                    err_num += 1;
+                    //continue;
+                }
+                if (num < len_cas) {
                     pdf.addPage();
                 }
             }
 
             pdf.save(`${pdfName}.pdf`);
+            if(err_num){
+                alert(`有 ${err_num} 页未加载！`);
+            }
         }
 
-
-
-        const replica = () => {
-            /**
-             * 灵感来源于https://greasyfork.org/zh-CN/scripts/445128
-             */
-            try {
-                var text = $('div.link')[0].outerText.split("”的文档")[0].split("查看全部包含“")[1];
-            } catch (error) {
-                console.log(error.stack);
-                text = "出错啦，请通知作者修复";
-            }
-
+        const clipboardCopy = text => {
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(text);
             } else {
@@ -301,15 +318,41 @@
             }
         }
 
+        const replica = (selectText = true) => {
+            /**
+             * 灵感来源于https://greasyfork.org/zh-CN/scripts/445128
+             */
+
+            try {
+                if (host == InterfaceList[1].host) {
+                    let text = $('div.link')[0].outerText.split("”的文档")[0].split("查看全部包含“")[1];
+                    clipboardCopy(text);
+                    $('.dialog-mask').remove();
+                    $('.copy-limit-dialog-v2').remove();
+                } else if (host == InterfaceList[5].host) {
+                    $('.sel_tips').remove();
+                    let selectedText = window.getSelection().toString();
+                    if (selectedText == '') {
+                        clipboardCopy(selectText);
+                    } else {
+                        clipboardCopy(selectedText);
+                    }
+                }
+            } catch (error) {
+                console.log(error.stack)
+                text = "出错啦，请通知作者修复";
+                throw new Error(`Error: ${error}`);
+            }
+
+        }
+
         (() => {
             let oldtext = "";
             let count = 0;
-            if (host == InterfaceList[1].host) {
+            if (host == InterfaceList[1].host || host == InterfaceList[5].host) {
                 $(document).unbind('keydown').bind('keydown', e => {
                     if (e.ctrlKey && e.keyCode == 67) {
                         replica();
-                        $('.dialog-mask').remove();
-                        $('.copy-limit-dialog-v2').remove();
                         $(".btn-success").text("复制成功").fadeOut(1000);
                         e.preventDefault();
                         count += 1;
@@ -318,8 +361,17 @@
                 })
 
                 document.onmouseup = ev => {
+                    let nowtext;
                     $(".btn-success").remove();
-                    var nowtext = $('div.link')[0].outerText.split("”的文档")[0].split("查看全部包含“")[1];
+                    if (host == InterfaceList[1].host) {
+                        nowtext = $('div.link')[0].outerText.split("”的文档")[0].split("查看全部包含“")[1];
+                    } else if (host == InterfaceList[5].host) {
+                        let selectedText = window.getSelection().toString();
+                        if (selectedText) {
+                            nowtext = selectedText;
+                        }
+                    }
+
                     if (nowtext != oldtext) {
                         const oEvent = ev || event;
                         const elbtn = $(`<div class="btn-success" style="left:${oEvent.clientX + 15 + 'px'}; top: ${oEvent.clientY - 10 + 'px'};">复制</div>`);
@@ -329,7 +381,7 @@
                     }
 
                     $(".btn-success").on("click", e => {
-                        replica();
+                        replica(nowtext);
                         count += 1;
                         console.info(`第${count}次为您复制,内容为：${nowtext}`);
                         //$(".btn-success").fadeOut(1000);
@@ -358,12 +410,14 @@
             '#docinShareSlider', '.backToTop', '.reader_tools_bar_wrap.tools_bar_small.clear',
             '.page_crubms.clear', '.adBox', '#jControlDiv'
         ]
+        const taodou_ele = ['span.fc2e', '.sel_tips']
+        const book118_ele = ['#btn_preview_remain']
 
         const bdwk = () => {
             $(".logo").hide();
             $(".die").hide();
             share();
-            setTimeout( () => {
+            setTimeout(() => {
                 window.print();
                 $(".logo").show();
             }, 1000);
@@ -389,6 +443,32 @@
             }
         }
 
+        const taodou = () => {
+            let ele = document.querySelectorAll('.textLayer_div canvas');
+            if (ele.length == 0) {
+                ele = document.querySelectorAll('img.errorimg');
+                if (ele.length == 0) {
+                    ele = document.querySelectorAll('img');
+                }
+            }
+            try {
+                downloadPDF(ele, title);
+
+            } catch (error) {
+                console.log(error.message);
+            }
+        }
+
+        const book118 = () => {
+            const ele = document.querySelectorAll('.webpreview-item img');
+            try {
+                downloadPDF(ele, title);
+
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
         const main = () => {
             for (const even in InterfaceList) {
                 if (host == InterfaceList[even].host) {
@@ -408,7 +488,7 @@
                 window.open(InterfaceList[0].url + webUrl);
             } else {
                 e.preventDefault();
-                alert('百度文库解析，豆丁道客巴巴请使用导出PDF');
+                alert('百度文库解析，其它文库请使用导出PDF');
             }
         });
         $("#li2").bind("click", () => {
@@ -421,6 +501,7 @@
                 if (host == InterfaceList[even].host) {
                     let ee = InterfaceList[even].el;
                     $(eval(ee)[0]).click();
+                    break;
                 }
             }
             $('.die').hide();
