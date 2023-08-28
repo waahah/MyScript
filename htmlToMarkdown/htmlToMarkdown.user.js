@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         下载CSDN、简书、掘金、知乎专栏、博客园、微信公众号、脚本之家、51CTO、程序员大本营、吾爱破解、B站、思否、腾讯云、阿里云、华为云等文章保存为Markdown文件
 // @namespace    https://waahah.xyz/
-// @version      0.1.6
+// @version      0.1.8
 // @description  下载保存博客文章为markdown,已支持CSDN、简书、掘金、知乎专栏、博客园、微信公众号、脚本之家、51CTO、程序员大本营、吾爱破解、腾讯云、阿里云、华为云、B站、思否、百度等，脚本仅限学习，请大家尊重版权。
 // @author       waahah
 // @require      https://unpkg.com/turndown/dist/turndown.js
@@ -46,7 +46,7 @@
     const InterfaceList = [
         { "host": "blog.csdn.net", "el": "article.baidu_pl", "cut_str": "_" },
         { "host": "www.jianshu.com", "el": "article._2rhmJa", "cut_str": " - " },
-        { "host": "juejin.cn", "el": ".article-content.markdown-viewer", "cut_str": " - " },
+        { "host": "juejin.cn", "el": ".article-viewer.markdown-body.result", "cut_str": " - " },
         { "host": "zhuanlan.zhihu.com", "el": ".Post-RichTextContainer", "cut_str": " - " },
         { "host": "www.cnblogs.com", "el": "#cnblogs_post_body", "cut_str": " - " },
         { "host": "www.jb51.net", "el": "#content", "cut_str": "_" },
@@ -108,17 +108,95 @@
         }
     }
 
+    await utils.css(`
+    #zuihuitao {
+        cursor: pointer;
+        position: fixed;
+        top: 100px;
+        left: 0px;
+        width: 0px;
+        z-index: 2147483647;
+        font-size: 12px;
+        text-align: left;
+    }
 
-    await utils.css(`#zuihuitao {cursor:pointer; position:fixed; top:100px; left:0px; width:0px; z-index:2147483647; font-size:12px; text-align:left;}
-        #zuihuitao .logo { position: absolute;right: 0; width: 1.375rem;padding: 10px 2px;text-align: center;color: #fff;cursor: auto;user-select: none;border-radius: 0 4px 4px 0;transform: translate3d(100%, 5%, 0);background: deepskyblue;}
-        #zuihuitao .die {display:none; position:absolute; left:28px; top:0; text-align:center;background-color:#04B4AE; border:1px solid gray;}
-        #zuihuitao .die li{font-size:12px; color:#fff; text-align:center; width:60px; line-height:21px; float:left; border:1px solid gray;border-radius: 6px 6px 6px 6px; padding:0 4px; margin:4px 2px;list-style-type: none;}
-        #zuihuitao .die li:hover{color:#fff;background:#FE2E64;}
-        @media print {body {display: block !important;}}
-        *{-webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; user-select: text;}
-        .add{background-color:#FE2E64;}
-        .btn-success{position: fixed;font-weight: 400;color: #fff;background-color: #28a745;border-color: #28a745;text-align: center;vertical-align: middle;border: 1px solid transparent;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;border-radius: .25rem; z-index:2147483647;cursor: pointer;}`);
+    #zuihuitao .logo {
+        position: absolute;
+        right: 0;
+        width: 1.375rem;
+        padding: 10px 2px;
+        text-align: center;
+        color: #fff;
+        cursor: auto;
+        user-select: none;
+        border-radius: 0 4px 4px 0;
+        transform: translate3d(100%, 5%, 0);
+        background: deepskyblue;
+    }
 
+    #zuihuitao .die {
+        display: none;
+        position: absolute;
+        left: 24px;
+        top: 0;
+        text-align: center;
+        background-color: #04b4ae;
+        border: 1px solid gray;
+    }
+
+    #zuihuitao .die li {
+        font-size: 12px;
+        color: #fff;
+        text-align: center;
+        width: 60px;
+        line-height: 21px;
+        float: left;
+        border: 1px solid gray;
+        border-radius: 6px 6px 6px 6px;
+        padding: 0 4px;
+        margin: 4px 2px;
+        list-style-type: none;
+    }
+
+    #zuihuitao .die li:hover {
+        color: #fff;
+        background: #fe2e64;
+    }
+
+    @media print {
+        body {
+                display: block !important;
+        }
+    }
+
+    * {
+        -webkit-user-select: text;
+        -moz-user-select: text;
+        -ms-user-select: text;
+        user-select: text;
+    }
+
+    .add {
+        background-color: #fe2e64;
+    }
+
+    .btn-success {
+        position: fixed;
+        font-weight: 400;
+        color: #fff;
+        background-color: #28a745;
+        border-color: #28a745;
+        text-align: center;
+        vertical-align: middle;
+        border: 1px solid transparent;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: 0.25rem;
+        z-index: 2147483647;
+        cursor: pointer;
+    }
+    `);
 
     const html = `<div id='zuihuitao'>
         <div class='item_text'>
@@ -165,6 +243,7 @@
         const turndownService = new TurndownService();
         const gfm = turndownPluginGfm.gfm;
         turndownService.use(gfm);
+        turndownService.remove('style');
         let ele = document.querySelector(el);
         let markdown = turndownService.turndown(ele);
         //console.log(markdown);
