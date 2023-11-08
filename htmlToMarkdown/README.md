@@ -1,4 +1,4 @@
-### 下载保存博客文章为markdown文件,已支持下列网站：
+### 下载保存博客文章为word/markdown文件,已支持下列网站：
 
 - [CSDN](https://blog.csdn.net/)
 - [简书](https://www.jianshu.com/)
@@ -24,7 +24,6 @@
 
 ### 修复支持下列功能
 - 支持表格
-- 支持代码高亮
 - 支持 `<strike>`, `<s>`, 和 `<del>` 删除线
 - 支持 `checkbox` 任务列表
 - 支持 `MathJax` 数学公式
