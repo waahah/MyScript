@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         下载CSDN、简书、掘金、知乎专栏、博客园、微信公众号、脚本之家、51CTO、程序员大本营、吾爱破解、B站、思否、腾讯云、阿里云、华为云等文章保存为Markdown文件
 // @namespace    https://waahah.xyz/
-// @version      0.1.8
+// @version      0.1.9
 // @description  下载保存博客文章为markdown,已支持CSDN、简书、掘金、知乎专栏、博客园、微信公众号、脚本之家、51CTO、程序员大本营、吾爱破解、腾讯云、阿里云、华为云、B站、思否、百度等，脚本仅限学习，请大家尊重版权。
 // @author       waahah
 // @require      https://unpkg.com/turndown/dist/turndown.js
 // @require      https://unpkg.com/turndown-plugin-gfm/dist/turndown-plugin-gfm.js
 // @match        *://blog.csdn.net/*
+// @match        *://*.blog.csdn.net/*
 // @match        *://www.jianshu.com/p/*
 // @match        *://juejin.cn/post/*
 // @match        *://zhuanlan.zhihu.com/p/*
@@ -269,7 +270,7 @@
     const main = async () => {
         let new_headline;
         for (const even in InterfaceList) {
-            if (host == InterfaceList[even].host) {
+            if (host.endsWith(InterfaceList[even].host)) {
                 let ele = InterfaceList[even].el;
                 let cut = InterfaceList[even].cut_str;
                 if(cut != ''){
