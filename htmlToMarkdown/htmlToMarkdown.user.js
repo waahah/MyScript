@@ -955,7 +955,7 @@ var TurndownService = (function () {
             headingStyle: 'setext',
             hr: '* * *',
             bulletListMarker: '*',
-            codeBlockStyle: 'indented',
+            codeBlockStyle: 'fenced',
             fence: '```',
             emDelimiter: '_',
             strongDelimiter: '**',
