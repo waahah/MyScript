@@ -1272,130 +1272,134 @@ var TurndownService = (function () {
  
  
     await utils.css(`
-    #zuihuitao {
-        cursor: pointer;
-        position: fixed;
-        top: 100px;
-        left: 0px;
-        width: 0px;
-        z-index: 2147483647;
-        font-size: 12px;
-        text-align: left;
-    }
+     #zuihuitao {
+       position: fixed;
+       top: 100px;
+       left: 0;
+       font-family: -apple-system, "Noto Sans", "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Source Han Sans CN", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
+       color: #222;
+       user-select: none;
+       z-index: 99999999;
+     }
+     
+     #zuihuitao #m {
+       display: inline-block;
+       padding: 2em 1em;
+       border-radius: 0 1em 1em 0;
+       background: #fff;
+       box-shadow: 0 0 3px 3px rgba(0, 0, 0, .05);
+       cursor: pointer;
+       writing-mode: vertical-rl;
+       text-orientation: upright;
+       white-space: nowrap;
+       font-size: 14px;
+       letter-spacing: .2em;
+       transition: .3s;
+     }
+     
+     #zuihuitao #m:hover {
+       background: #fafafa;
+     }
+     
+     #zuihuitao:hover .download-list {
+       left: 5em;
+     }
+     
+     #zuihuitao svg {
+       width: 1.2em;
+     }
+     
+     #zuihuitao .download-list {
+       position: absolute;
+       top: 50%;
+       left: -400%;
+       display: flex;
+       flex-direction: column;
+       list-style: none;
+       background: #fff;
+       padding: 0 1.6em;
+       border-radius: 1em;
+       transform: translateY(-50%);
+       filter: drop-shadow(0 0 3px rgba(0, 0, 0, .05));
+       transition: .6s;
+     }
+     
+     #zuihuitao .download-list::before {
+       content: '';
+       position: absolute;
+       width: 0;
+       height: 0;
+       border: 1em solid transparent;
+       border-right-color: #fff;
+       top: 50%;
+       left: -2em;
+       transform: translateY(-50%);
+     }
+     
+     #zuihuitao .download-list li {
+       display: flex;
+       flex-direction: column;
+       gap: .4em;
+       padding: 1.6em 0;
+     }
+     
+     #zuihuitao .download-list li:first-of-type {
+       border-bottom: 1px solid #eee;
+     }
+     
+     #zuihuitao .download-list li .export-text {
+       white-space: nowrap;
+       font-size: 14px;
+       color: #888;
+     }
+     
+     #zuihuitao .download-list li .download-btn {
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       gap: .2em;
+       white-space: nowrap;
+       text-align: center;
+       padding: .4em;
+       border-radius: 100vh;
+       background: #eee;
+       cursor: pointer;
+       transition: .3s;
+     }
+     
+     #zuihuitao .download-list li .download-btn:hover {
+       background: #333;
+       color: #fff;
+     }
+     
+     #zuihuitao .download-list li .download-btn:hover svg {
+       stroke: #fff;
+     }
+
+     @media print {
+         body {
+                 display: block !important;
+         }
+     }
  
-    #zuihuitao .logo {
-        position: absolute;
-        right: 0;
-        width: 1.375rem;
-        padding: 10px 2px;
-        text-align: center;
-        color: #fff;
-        cursor: auto;
-        user-select: none;
-        border-radius: 0 4px 4px 0;
-        transform: translate3d(100%, 5%, 0);
-        background: deepskyblue;
-    }
- 
-    #zuihuitao .die {
-        display: none;
-        position: absolute;
-        left: 24px;
-        top: 0;
-        text-align: center;
-        background-color: #04b4ae;
-        border: 1px solid gray;
-    }
- 
-    #zuihuitao .die li {
-        font-size: 12px;
-        color: #fff;
-        text-align: center;
-        width: 60px;
-        line-height: 21px;
-        float: left;
-        border: 1px solid gray;
-        border-radius: 6px 6px 6px 6px;
-        padding: 0 4px;
-        margin: 4px 2px;
-        list-style-type: none;
-    }
- 
-    #zuihuitao .die li:hover {
-        color: #fff;
-        background: #fe2e64;
-    }
- 
-    @media print {
-        body {
-                display: block !important;
-        }
-    }
- 
-    * {
-        -webkit-user-select: text;
-        -moz-user-select: text;
-        -ms-user-select: text;
-        user-select: text;
-    }
- 
-    .add {
-        background-color: #fe2e64;
-    }
- 
-    .btn-success {
-        position: fixed;
-        font-weight: 400;
-        color: #fff;
-        background-color: #28a745;
-        border-color: #28a745;
-        text-align: center;
-        vertical-align: middle;
-        border: 1px solid transparent;
-        padding: 0.375rem 0.75rem;
-        font-size: 1rem;
-        line-height: 1.5;
-        border-radius: 0.25rem;
-        z-index: 2147483647;
-        cursor: pointer;
-    }
+     * {
+         -webkit-user-select: text;
+         -moz-user-select: text;
+         -ms-user-select: text;
+         user-select: text;
+     }
     `);
  
  
     const html = `<div id='zuihuitao'>
-        <div class='item_text'>
-            <div class="logo"><a id="m">文档下载</a></div>
-                <div class='die' >
-                    <div style='display:flex;'>
-                        <div style='width:128px; padding:0px 0;'>
-                        <br>
-                            <div style='font-size:16px; text-align:center; color:#fff; line-height:21px;'>导出Markdown</div>
-                            <ul style='margin:0 24px;'>
-                                <li id="li0">下载</li>
-                                <div style='clear:both;'></div>
-                            </ul>
-                            <br>
-                            <div style='font-size:16px; text-align:center; color:#fff; line-height:21px;'>导出Word</div>
-                            <ul style='margin:0 24px;'>
-                                <li id="li1">下载</li>
-                                <div style='clear:both;'></div>
-                            </ul>
-                            <br>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>`;
- 
+       <div id="m"><svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 8C5 6.89543 5.89543 6 7 6H19L24 12H41C42.1046 12 43 12.8954 43 14V40C43 41.1046 42.1046 42 41 42H7C5.89543 42 5 41.1046 5 40V8Z" fill="none" stroke="#333" stroke-width="4" stroke-linejoin="round"/><path d="M30 28L23.9933 34L18 28.0134" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 20V34" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>文档下载</div>
+       <ul class="download-list">
+         <li><span class="export-text">导出为Markdown</span><span class="download-btn"><svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M40.5178 34.3161C43.8044 32.005 45.2136 27.8302 44.0001 24C42.7866 20.1698 39.0705 18.0714 35.0527 18.0745H32.7317C31.2144 12.1613 26.2082 7.79572 20.1435 7.0972C14.0787 6.39868 8.21121 9.5118 5.38931 14.9253C2.56741 20.3388 3.37545 26.9317 7.42115 31.5035" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M24.0084 41L24 23" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M30.3638 34.6362L23.9998 41.0002L17.6358 34.6362" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>下载</span></li>
+         <li><span class="export-text">导出为Word</span><span class="download-btn"><svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M40.5178 34.3161C43.8044 32.005 45.2136 27.8302 44.0001 24C42.7866 20.1698 39.0705 18.0714 35.0527 18.0745H32.7317C31.2144 12.1613 26.2082 7.79572 20.1435 7.0972C14.0787 6.39868 8.21121 9.5118 5.38931 14.9253C2.56741 20.3388 3.37545 26.9317 7.42115 31.5035" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M24.0084 41L24 23" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M30.3638 34.6362L23.9998 41.0002L17.6358 34.6362" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>下载</span></li>
+       </ul>
+     </div>`;
+
     await utils.node(html);
-    document.getElementsByClassName('item_text')[0].addEventListener('mouseover', () => {
-        document.getElementsByClassName('die')[0].style.display = 'block';
-    });
- 
-    document.getElementsByClassName('item_text')[0].addEventListener('mouseout', () => {
-        document.getElementsByClassName('die')[0].style.display = 'none';
-    })
  
     const cut_title = async (title, cut_str) => {
         try{
@@ -1460,11 +1464,10 @@ var TurndownService = (function () {
  
     }
  
-    document.getElementById('li0').addEventListener('click', async () => {
+    document.querySelectorAll('#zuihuitao .download-list li .download-btn')[0].addEventListener('click', async () => {
  
         await exportMd().then(
             res => {
-                document.getElementsByClassName('die')[0].style.block = 'none';
                 console.log(`文件 ${res}.md 已开始下载~`);
             }
         ).catch(
@@ -1474,7 +1477,7 @@ var TurndownService = (function () {
         );
     });
  
-    document.getElementById('li1').addEventListener('click', async () => {
+    document.querySelectorAll('#zuihuitao .download-list li .download-btn')[1].addEventListener('click', async () => {
  
         const data = await getData();
         await utils.exportdoc(data.el, data.title);
