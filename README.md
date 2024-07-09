@@ -24,10 +24,9 @@
 |  | 脚本名称 | 脚本功能 | 安装 |
 | :----: | :---- | :---- | :----: |
 | [<img src="https://s2.loli.net/2023/05/03/RerDYqAyfTkuHpQ.jpg?s=16&v=4" height="16px" />](https://github.com/waahah) | **文库下载器** | 百度文库解析**下载**功能 解除百度文库**复制**限制【保持原格式】... | **[安装](https://greasyfork.org/zh-CN/scripts/437609)**|
-| [<img src="https://s2.loli.net/2023/05/03/E34ou72kZY9mAVI.png" height="16px" />](https://github.com/waahah/) | **极简视频解析** | 支持B站、腾讯视频、爱奇艺、优酷、土豆、芒果TV、搜狐... | **[安装](https://github.com/waahah/MyScript/blob/main/jiexiVideo/videoJiexi.user.js)** |
 | [<img src="https://s2.loli.net/2023/08/14/3QwfIADONm2Wv8t.png" height="16px" />](https://github.com/waahah) | **文章转md文件** | **下载**csdn,博客园,掘金,简书等文章**保存为markdown**文件... | **[安装](https://greasyfork.org/zh-CN/scripts/472996)** |
-| [<img src="https://s2.loli.net/2023/05/03/nIiJsfZwWBGprN7.jpg" height="16px" />](https://github.com/waahah) | **自动填充验证码** | **自动识别**填充验证码以及账号信息并登录,不需要到代码中修... | **[安装](https://greasyfork.org/zh-CN/scripts/441805)** |
 | [<img src="https://s2.loli.net/2023/05/03/jnmuEAdzMcbxWp6.jpg" height="16px" />](https://github.com/waahah) | **直达外链** | **略过csdn,简书,掘金等安全中心**外链直达、**解除csdn复制限制**... | **[安装](https://greasyfork.org/zh-CN/scripts/444972)** |
+| [<img src="https://s2.loli.net/2023/05/03/nIiJsfZwWBGprN7.jpg" height="16px" />](https://github.com/waahah) | **自动填充验证码** | **自动识别**填充验证码以及账号信息并登录,不需要到代码中修... | **[安装](https://greasyfork.org/zh-CN/scripts/441805)** |
 | [<img src="https://s2.loli.net/2023/05/03/E34ou72kZY9mAVI.png" height="16px" />](https://github.com/waahah/) | **简洁视频解析** | 只做VIP视频解析，专注简洁，不做冗余庞杂的集合脚本。... | **[安装](https://greasyfork.org/zh-CN/scripts/437435)** |
 | [<img src="https://i.loli.net/2021/03/30/ULV9XunaHesqGIR.png" height="16px" />](https://github.com/waahah) |  **视频倍速播放** | 最低0.1倍速，最高20倍速，记录播放**速度**，记录显示**位置**... | **[安装](https://github.com/waahah/MyScript/blob/main/speedPlay/speedyPlay.user.js)** |
 | [<img src="https://www.google.com/s2/favicons?sz=64&domain=greasyfork.org" height="16px" />](https://github.com/waahah) |  **自认证校园网** | 免去重复**登陆**校园网认证系统的烦恼，解放双手... | **[安装](https://greasyfork.org/zh-CN/scripts/441791)** |
