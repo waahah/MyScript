@@ -536,6 +536,11 @@ var TurndownService = (function () {
             var src = node.getAttribute('src') || '';
             var title = cleanAttribute(node.getAttribute('title'));
             var titlePart = title ? ' "' + title + '"' : '';
+
+            if (document.URL.indexOf('weixin.qq.com') >= 0) {
+                src = node.getAttribute('data-src') || '';
+            }
+
             return src ? '![' + alt + ']' + '(' + src + titlePart + ')' : ''
         }
     };
@@ -953,7 +958,7 @@ var TurndownService = (function () {
         var defaults = {
             rules: rules,
             headingStyle: 'setext',
-            hr: '* * *',
+            hr: '***',
             bulletListMarker: '*',
             codeBlockStyle: 'fenced',
             fence: '```',
