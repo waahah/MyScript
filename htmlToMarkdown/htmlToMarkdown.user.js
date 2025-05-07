@@ -29,6 +29,7 @@
 // @match        *://segmentfault.com/*/*
 // @match        *://www.qinglite.cn/doc/*
 // @match        *://www.manongjc.com/detail*
+// @match        *://javaguide.cn/*
 // @license      Apache-2.0
 // @icon         data:image/svg+xml,%3Csvg t='1691941995383' class='icon' viewBox='0 0 1024 1024' version='1.1' xmlns='http://www.w3.org/2000/svg' p-id='1514' width='200' height='200'%3E%3Cpath d='M320 864 320 0l480 0 0 192 0 32L1024 224l0 640L320 864zM928 320l-512 0 0 32 512 0L928 320zM928 448l-512 0 0 32 512 0L928 448zM928 576l-512 0 0 32 512 0L928 576zM928 704l-512 0 0 32 512 0L928 704zM832 0l19.2 0L1024 160 1024 192l-192 0L832 0zM288 896l320 0L704 896l0 128L0 1024 0 160l288 0 0 320-192 0L96 512l192 0 0 96-192 0L96 640l192 0 0 96-192 0L96 768l192 0 0 96-192 0L96 896 288 896z' p-id='1515'%3E%3C/path%3E%3C/svg%3E
 // @grant        none
@@ -536,6 +537,11 @@ var TurndownService = (function () {
             var src = node.getAttribute('src') || '';
             var title = cleanAttribute(node.getAttribute('title'));
             var titlePart = title ? ' "' + title + '"' : '';
+
+            if (document.URL.indexOf('weixin.qq.com') >= 0) {
+                src = node.getAttribute('data-src') || '';
+            }
+
             return src ? '![' + alt + ']' + '(' + src + titlePart + ')' : ''
         }
     };
@@ -953,7 +959,7 @@ var TurndownService = (function () {
         var defaults = {
             rules: rules,
             headingStyle: 'setext',
-            hr: '* * *',
+            hr: '***',
             bulletListMarker: '*',
             codeBlockStyle: 'fenced',
             fence: '```',
@@ -1210,7 +1216,8 @@ var TurndownService = (function () {
         { "host": "mp.weixin.qq.com", "el": "#js_content", "cut_str": "" },
         { "host": "segmentfault.com", "el": ".article.fmt.article-content", "cut_str": "- SegmentFault 思否" },
         { "host": "www.qinglite.cn", "el": ".markdown-body", "cut_str": "-" },
-        { "host": "www.manongjc.com", "el": "#code_example", "cut_str": " - " }
+        { "host": "www.manongjc.com", "el": "#code_example", "cut_str": " - " },
+        { "host": "javaguide.cn", "el": ".theme-hope-content", "cut_str": "-" },
         
     ]
  
